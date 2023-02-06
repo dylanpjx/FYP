@@ -7,6 +7,8 @@ const mysql = require('mysql');
 const allowedOrigins = ['http://localhost:3000']
 const TIME_LIMIT = 2 // in hours
 
+
+// TODO: move to env after testing
 const db = mysql.createConnection({
     host : 'localhost',
     user : 'root',
@@ -20,9 +22,11 @@ db.connect(function(err) {
     } else{
       console.log("Successfully connected to database!");
     }
-    //first table has 7 columns: id, name, matricno, group, role, username, password
+
+    // TODO: init through bash after test
+    // [id, name, matricno, group, role, username, password]
     let createTable = `create table if not exists userdata (id int auto_increment, StudentName varchar(255) null, MatricNo varchar(255) null, Group int null, Role varchar(255) null, Username varchar(255) not null, Password varchar(255) not null, PRIMARY KEY (id))`;
-    //second table has 6 columns: id, date, group, starttime, endtime, duration
+    // [id, date, group, starttime, endtime, duration]
     let createTable2 = `create table if not exists bookings (id int auto_increment, Date varchar(255) not null, Group int not null, Start_time varchar(255) not null, End_time varchar(255) null, Duration varchar(255) not null, PRIMARY KEY(id))`;
     
     
@@ -67,18 +71,6 @@ const bookingTimeCheck = async (req, res) => {
 };
 
 
-
-// const db = mysql.createConnection({
-//     host: 'localhost',
-//     user: '',
-//     password: '',
-//     database: ''
-// })
-
-// db.connect()
-
-// db.query()
-
 router.post("/register", (req, res) => {
     const { username, password } = req.body;
     const saltRounds = 10;
@@ -96,7 +88,8 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
-    const sql = `SELECT (Password) FROM userdata WHERE Username = ${username}`; // TODO: search query
+    const sql = `SELECT (Password) FROM userdata WHERE Username = ${username}`
+
     db.query(sql, (err, result) => {
         if (err) throw err;
 
