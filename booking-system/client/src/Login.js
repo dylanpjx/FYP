@@ -12,7 +12,7 @@ const BACKEND_URL = 'http://localhost:5000';
 const Login = () => {
     const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
     const avatarStyle = { backgroundColor: '#1bbd7e' };
-    const btnstyle = { margin: '8px 0' };
+    const btnStyle = { margin: '8px 0' };
 
     let navigate = useNavigate();
     
@@ -81,9 +81,9 @@ const Login = () => {
                     <form onSubmit={onLogin}>
                     <Grid 
                         container 
-                        direction="column"
-                        justify="center"
-                        alignItems="stretch"
+                        direction='column'
+                        justify='center'
+                        alignItems='stretch'
                         spacing={2}
                     >
 
@@ -93,7 +93,7 @@ const Login = () => {
                                 value={username} 
                                 label='Username' 
                                 placeholder='Enter username' 
-                                variant="outlined" 
+                                variant='outlined' 
                                 onChange={(e) => setUsername(e.target.value)} 
                                 fullWidth 
                                 required 
@@ -107,7 +107,7 @@ const Login = () => {
                                     label='Password' 
                                     placeholder='Enter password' 
                                     type='password' 
-                                    variant="outlined"
+                                    variant='outlined'
                                     onChange={(e) => setPassword(e.target.value)} 
                                     fullWidth 
                                     required 
@@ -116,12 +116,12 @@ const Login = () => {
 
                             <Grid item>
                                 <RadioGroup
-                                    name="userGroup"
+                                    name='userGroup'
                                     value={userRole}
                                     onChange={(e)=>{ setUserRole(e.currentTarget.value)}}>    
-                                    <FormControlLabel value="Student" control={<Radio />} label="Student" />
-                                    <FormControlLabel value="Lecturer" control={<Radio />} label="Lecturer" />
-                                    <FormControlLabel value="Admin" control={<Radio />} label="Admin" />
+                                    <FormControlLabel value='Student' control={<Radio />} label='Student' />
+                                    <FormControlLabel value='Lecturer' control={<Radio />} label='Lecturer' />
+                                    <FormControlLabel value='Admin' control={<Radio />} label='Admin' />
                                 </RadioGroup>
                             </Grid>
 
@@ -129,8 +129,8 @@ const Login = () => {
                                 <Button 
                                     type='submit' 
                                     color='primary' 
-                                    variant="contained" 
-                                    style={btnstyle} 
+                                    variant='contained' 
+                                    style={btnStyle} 
                                     fullWidth 
                                 >
                                     Sign in
