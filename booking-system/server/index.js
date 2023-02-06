@@ -7,6 +7,8 @@ const mysql = require('mysql');
 const allowedOrigins = ['http://localhost:3000']
 const TIME_LIMIT = 2 // in hours
 
+
+// TODO: move to env after testing
 const db = mysql.createConnection({
     host : 'localhost',
     user : 'root',
@@ -20,12 +22,12 @@ db.connect(function(err) {
     } else{
       console.log("Successfully connected to database!");
     }
-    //first table has 8 columns: id, name, module, matricno, group, role, username, password
+
+    // [id, name, matricno, group, role, username, password]
     let createTable = `create table if not exists userdata (id int auto_increment, StudentName varchar(255) not null, Module varchar(255) not null, MatricNo varchar(255) not null, Group int not null, Role varchar(255) not null, Username varchar(255) not null, Password varchar(255) not null, PRIMARY KEY (id))`;
-    //second table has 5 columns: id, group, starttime, endtime, duration
+    // [id, date, group, starttime, endtime, duration]
     let createTable2 = `create table if not exists bookings (id int auto_increment, Group int not null, Start_time varchar(255) not null, End_time varchar(255) null, Duration varchar(255) not null, PRIMARY KEY(id))`;
-    
-    
+
     db.query(createTable, function(err, results, fields) {
       if (err) {
         console.log(err.message);
@@ -38,6 +40,7 @@ db.connect(function(err) {
     });
   
 });
+
 const bookingTimeCheck = async (req, res) => {
     const event = req.body
     const group = event.grp_id;
@@ -64,12 +67,12 @@ const bookingTimeCheck = async (req, res) => {
     return res.status(200).json({ message: "Booking succesful" });
 };
 
-
 // db.connect()
 
 // db.query()
 
 //add the need to include StudentName, Module, MatricNo, Group, Role when registering
+//
 router.post("/register", (req, res) => {
     const { username, password } = req.body;
     const saltRounds = 10;
@@ -88,6 +91,7 @@ router.post("/register", (req, res) => {
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
     const sql = `SELECT (Password) FROM userdata WHERE Username = ${username}`;
+
     db.query(sql, (err, result) => {
         if (err) throw err;
 
