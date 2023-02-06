@@ -2,6 +2,9 @@ import { React, useState } from 'react';
 import { parseISO } from 'date-fns';
 import axios from 'axios';
 import { Scheduler } from '@aldabil/react-scheduler';
+import { useNavigate } from "react-router-dom";
+import Button from '@mui/material/Button';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 import DialogPopup from './DialogPopup'
 
@@ -13,6 +16,8 @@ const Calendar = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
     const [dialogTitle, setDialogTitle] = useState("");
+
+    let navigate = useNavigate();
 
     const handleDialogClose = () => {
         setDialogTitle("");
@@ -39,7 +44,7 @@ const Calendar = () => {
             console.log('Error:', err);
         }
     }
-    
+
     const handleConfirm = async (event, action) => {
         try {
             let url;
@@ -68,11 +73,11 @@ const Calendar = () => {
             } else {
                 return null;
             }
-            
+
             if (event_color) {
                 event = {
                     ...event,
-                    color: {event_color}
+                    color: { event_color }
                 }
             }
             let body = JSON.stringify(event);
@@ -100,6 +105,14 @@ const Calendar = () => {
 
     return (
         <div>
+            <Button
+                variant="contained"
+                onClick={() => navigate("/home")}
+                startIcon={ <ArrowLeftIcon /> }
+            >
+            Back
+            </Button>
+
             <Scheduler
                 getRemoteEvents={fetchRemote}
                 onConfirm={handleConfirm}
