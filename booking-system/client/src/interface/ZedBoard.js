@@ -2,11 +2,7 @@ import Buttons from "./Buttons";
 import Switches from "./Switches";
 import Leds from "./Leds";
 import { useState } from 'react';
-
-const handleButtonPress = (e,buttonpressed) => {
-  e.preventDefault();
-  console.log(buttonpressed);
-}
+import SingleButton from "./SingleButton";
 
 /*
 Table 12 - Push Button Connections
@@ -42,97 +38,32 @@ LD6 PL U19
 LD7 PL U14
 LD9 PS D5 (MIO7)
 */
-const ZedBoard = () => {
+const Zedboard = () => {
 
-  const [ledState,setLedState]=useState([
-    {
-      id:0,
-      state:false,
-      name:"LD0",
-    },
-    {
-      id:1,
-      state:false,
-      name:"LD1",
-    },
-    {
-      id:2,
-      state:false,
-      name:"LD2",
-    },
-    {
-      id:3,
-      state:false,
-      name:"LD3",
-    },
-    {
-      id:4,
-      state:false,
-      name:"LD4",
-    },
-    {
-      id:5,
-      state:false,
-      name:"LD5",
-    },
-    {
-      id:6,
-      state:false,
-      name:"LD6",
-    },
-    {
-      id:7,
-      state:false,
-      name:"LD7",
-    },
-    {
-      id:8,
-      state:false,
-      name:"LD9",
+  const ButtonNames = ["PB1","PB2"];
+
+  const switchArr = [];
+  for(let i=0; i<=7; i++){
+    switchArr.push({
+      id: i,
+      state: false,
+      name: `SW${i}`
+    });
+  }
+
+  const ledArr = [];
+  for (let i=0; i<=9; i++){
+    if(i !== 8){
+      ledArr.push({
+      id: i,
+      state: false,
+      name: `LD${i}`
+      });
     }
-  ]);
-  const [switchState, setSwitchState] = useState([
-    {
-      id:0,
-      state:false,
-      name:"SW0",
-    },
-    {
-      id:1,
-      state:false,
-      name:"SW1",
-    },
-    {
-      id:2,
-      state:false,
-      name:"SW2",
-    },
-    {
-      id:3,
-      state:false,
-      name:"SW3",
-    },
-    {
-      id:4,
-      state:false,
-      name:"SW4",
-    },
-    {
-      id:5,
-      state:false,
-      name:"SW5",
-    },
-    {
-      id:6,
-      state:false,
-      name:"SW6",
-    },
-    {
-      id:7,
-      state:false,
-      name:"SW7",
-    }
-  ]);
+  }
+
+  const [ledState,setLedState]=useState(ledArr);
+  const [switchState, setSwitchState] = useState(switchArr);
 
   const handleSwitchToggle = (id) => {
     const switchItems = switchState.map(switchItem => switchItem.id === id?
@@ -149,29 +80,10 @@ const ZedBoard = () => {
 
   return (
     <main>
-      <h3>ZedBoard</h3>
+      <h3>Zedboard</h3>
       <Buttons />
       <div className="ZedboardButtonsContainer">
-        <div>
-          <label>PB1</label>
-          <div>
-            <button 
-            id="PB1"
-            onClick={(e)=>handleButtonPress(e,"PB1")}>
-              <div></div>
-            </button>
-          </div>
-        </div>
-        <div>
-          <label>PB2</label>
-          <div>
-            <button 
-            id="PB2"
-            onClick={(e)=>handleButtonPress(e,"PB2")}>
-              <div></div>
-            </button>
-          </div>
-        </div>
+        {ButtonNames.map((ButtonName) => <SingleButton name={ButtonName} key={ButtonName}/>)}
       </div>
       <Switches switchState={switchState} handleSwitchToggle={handleSwitchToggle}/>
       <Leds ledState={ledState}/>
@@ -179,4 +91,4 @@ const ZedBoard = () => {
   )
 }
 
-export default ZedBoard
+export default Zedboard

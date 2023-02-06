@@ -25,12 +25,12 @@ const Artix7 = () => {
             name: `LED${i}`
         });
     }
-    const [ledState,setLedState] = useState([ledArr]);
+    const [ledState,setLedState] = useState(ledArr);
     
     const cathodes = ["CF", "CA", "CB", "CG", "CE", "CC", "CD", "DP"]
     const [sevenSegItems, setSevenSegItems] = useState(
         [...Array(4).keys()].flatMap(i =>
-            nodes.map(node => ({
+            cathodes.map(node => ({
               name: `AN${i}`,
               state: true,
               node

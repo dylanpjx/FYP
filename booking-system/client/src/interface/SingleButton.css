@@ -1,23 +1,15 @@
-.ZedboardButtonsContainer{
-  height: 90px;
-  width: 300px;
-  text-align: left;
-  justify-content: left;
-}
-
-#PB1:hover, #PB2:hover {
+.SingleButtonContainer div button:hover {
   outline: 0;
   border-radius: 5px;
   box-shadow: 0 0 5px 0 blue;
 }
 
-#PB1:active, #PB2:active {
+.SingleButtonContainer div button:active {
   outline: auto;
   outline-color: black;
 }
 
-#PB1, #PB2{
-  position: relative;
+.SingleButtonContainer div button{
   justify-content: center;
   align-items: center;
   display: flex;
@@ -30,22 +22,26 @@
   border-width: 0;
 }
 
-#PB1 div, #PB2 div{
-  top: 50%;
-  left: 50%;
+.SingleButtonContainer div button div {
   width: 25px;
   height: 25px;
   border-radius: 50%;
 }
 
-.ZedboardButtonsContainer div div {
+.SingleButtonContainer div {
+  justify-content: left;
+  align-items: left;
   display: flex;
   padding: 0;
   margin: 0;
   background-color: white;
 }
 
-.ZedboardButtonsContainer div {
+.SingleButtonContainer {
+  top: 0;
+  left: 0;
   display: inline-block;
+  text-align: left;
+  justify-content: left;
   margin: 0px 10px;
 }

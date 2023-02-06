@@ -1,0 +1,531 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.Artix7 {
+  margin: 0 0 0 5px;
+}
+
+.Buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#buttonContainer {
+  display: inline-block;
+  position: static;
+  width: 300px;
+  height: 300px;
+  text-align: center;
+}
+
+.Buttons label:nth-child(3){
+  position: relative;
+  left: 70px;
+  top: -15px;
+}
+
+.Buttons label:nth-child(5){
+  position: relative;
+  top: 55px;
+}
+
+.Buttons label:nth-child(7){
+  position: relative;
+  left: -75px;
+  top: -185px;
+}
+
+#UpButton:hover, #RightButton:hover, #DownButton:hover, #LeftButton:hover, #CentreButton:hover {
+  outline: 0;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 0 blue;
+}
+
+#UpButton:active, #RightButton:active, #DownButton:active, #LeftButton:active, #CentreButton:active {
+  outline: auto;
+  outline-color: black;
+}
+
+/* up button */
+#UpButton{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  margin: 0;
+  cursor:pointer;
+  background-color: grey;
+  border-width: 0;
+}
+
+#RightButton{
+  position: relative;
+  left: 70px;
+  top: -15px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  margin: 0;
+  cursor:pointer;
+  background-color: grey;
+  border-width: 0;
+}
+
+#DownButton{
+  position: relative;
+  top: -30px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  margin: 0;
+  cursor:pointer;
+  background-color: grey;
+  border-width: 0;
+}
+
+#LeftButton{
+  position: relative;
+  left: -70px;
+  top: -185px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  margin: 0;
+  cursor:pointer;
+  background-color: grey;
+  border-width: 0;
+}
+
+#CentreButton{
+  position: relative;
+  top: -250px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  margin: 0;
+  cursor:pointer;
+  background-color: grey;
+  border-width: 0;
+}
+
+#UpButton div, #RightButton div, #DownButton div, #LeftButton div {
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border-left: solid 22px grey; 
+  border-right: solid 22px grey; 
+  border-bottom: solid 44px whitesmoke;
+  border-top: 0px;
+}
+
+#RightButton div {
+  transform: rotate(90deg);
+}
+
+#LeftButton div {
+  transform: rotate(-90deg);
+}
+
+#DownButton div {
+  transform: rotate(180deg);
+}
+
+#CentreButton div {
+  top: 50%;
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+#buttonContainer div {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+}
+
+.Leds {
+  display: flex;
+  justify-content: space-around;
+}
+
+.Leds .ledIconOn{
+  background-color: rgb(255, 0, 38);
+  width: 25px;
+  height: 25px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 50%; 
+  outline: 1px solid black;
+}
+
+.Leds .ledIconOff{
+  background-color: whitesmoke;
+  width: 25px;
+  height: 25px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 50%; 
+  outline: 1px solid black;
+}
+
+.Leds li {
+  display: inline-block;
+  text-align: center;
+  width: 5rem;
+  height: 5rem;
+}
+
+.Switches {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.SwitchItem {
+  display: inline-block;
+  text-align: center;
+  width: 5rem;
+  height: 5rem;
+}
+
+.SwitchItem label {
+  margin: 1rem;
+  font-size: 1rem;
+}
+
+.SwitchItem label[target]{
+  cursor: pointer;
+}
+
+.SevenSeg {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.SevenSeg ul {
+  background-color: white;
+}
+
+.SevenSeg li {
+  display: inline;
+  float: left;
+  text-align: center;
+}
+.SevenSeg li label {
+  font-size: 1.2rem;
+}
+
+.SevenSegmentDisplay li {
+  float: left;
+  vertical-align: top;
+}
+
+.SevenSeg #AN0 {
+  width: 160px;
+  height: 260px;
+}
+
+.SevenSeg #AN1 {
+  width: 160px;
+  height: 260px;
+}
+
+.SevenSeg #AN2 {
+  width: 160px;
+  height: 260px;
+}
+
+.SevenSeg #AN3 {
+  width: 160px;
+  height: 260px;
+}
+ 
+.SevenSegmentDisplay #CA {
+  width: 50px;
+  height: 60px;
+  margin: 0px 3px 10px;
+}
+
+.SevenSegmentDisplay #CB {
+  width: 20px;
+  height: 60px;
+  margin: 5px 0px 10px;
+}
+
+.SevenSegmentDisplay #CF {
+  width: 20px;
+  height: 60px;
+  margin: 5px 0 0 30px;
+}
+
+.SevenSegmentDisplay #CG {
+  width: 50px;
+  height: 20px;
+  margin: 0px 53px;
+}
+
+.SevenSegmentDisplay #CE {
+  width: 20px;
+  height: 50px;
+  margin: 10px 30px 0px 30px;
+}
+
+.SevenSegmentDisplay #CC {
+  width: 20px;
+  height: 50px;
+  margin: 10px 0 5px 27px;
+}
+
+.SevenSegmentDisplay #CD {
+  width: 50px;
+  height: 20px;
+  margin: 10px 0px 0px 50px;
+}
+
+.SevenSegmentDisplay #DP {
+  width: 20px;
+  height: 20px;
+  margin: 12px 0 0 30px;
+}
+
+.SevenSegmentDisplay .CA_Off{
+  background-color: whitesmoke;
+  width: 50px;
+  height: 15px;
+  margin: auto;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CA_On{
+  background-color: red;
+  width: 50px;
+  height: 15px;
+  margin: auto;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CB_Off{
+  background-color: whitesmoke;
+  width: 15px;
+  height: 60px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CB_On{
+  background-color: red;
+  width: 15px;
+  height: 60px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CC_Off{
+  background-color: whitesmoke;
+  width: 15px;
+  height: 60px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CC_On{
+  background-color: red;
+  width: 15px;
+  height: 60px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CD_Off{
+  background-color: whitesmoke;
+  width: 50px;
+  height: 15px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CD_On{
+  background-color: red;
+  width: 50px;
+  height: 15px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CE_Off{
+  background-color: whitesmoke;
+  width: 15px;
+  height: 60px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CE_On{
+  background-color: red;
+  width: 15px;
+  height: 60px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CF_Off{
+  background-color: whitesmoke;
+  width: 15px;
+  height: 60px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CF_On{
+  background-color: red;
+  width: 15px;
+  height: 60px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CG_Off{
+  background-color: whitesmoke;
+  width: 50px;
+  height: 15px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .CG_On{
+  background-color: red;
+  width: 50px;
+  height: 15px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .DP_Off{
+  background-color: whitesmoke;
+  width: 10px;
+  height: 10px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 50%; 
+  outline: 1px solid black;  
+}
+
+.SevenSegmentDisplay .DP_On{
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  margin: 0.5rem auto 1rem;
+  border-radius: 50%; 
+  outline: 1px solid black;  
+}
+
+.check_box {
+  display:none;
+}
+
+.check_box + label{
+  background:url('/images/off-button.png') no-repeat;
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+  padding: 0 0 0 0px;
+}
+
+.check_box:checked + label{
+  background:url('/images/on-button.png') no-repeat;
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+  padding: 0 0 0 0px;
+}
+
+.FileUpload button {
+  border: 0;
+  border-radius: 0.25rem;
+  background-color: #1E88E5;
+  color: whitesmoke;
+  font-family: -system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  cursor: pointer;
+}
+
+.FileUpload button:hover {
+  outline: 0;
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px blue;
+}
+
+.FileUpload ::-webkit-file-upload-button {
+  border: 0;
+  border-radius: 0.25rem;
+  background-color: #1E88E5;
+  color: whitesmoke;
+  font-family: -system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  cursor: pointer;
+}
+
+.STM32ButtonsContainer {
+  text-align: left;
+  justify-content: left;
+  margin: 10px;
+  width: 600px;
+  height: 100px;
+}

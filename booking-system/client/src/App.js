@@ -6,10 +6,12 @@ import Login from './Login';
 import Homepage from './Homepage';
 import Calendar from './Calendar';
 
-import Artix7 from './interface/Artix7.js'
-import Zedboard from './interface/Zedboard.js'
-import Stm32 from './interface/Stm32.js'
+import Artix7 from './interface/Artix7.js';
+import Zedboard from './interface/Zedboard.js';
+import Stm32 from './interface/STM32.js';
 
+import './interface/Interface.css';
+import './interface/SingleButton.css';
 
 function App() {
     return (
