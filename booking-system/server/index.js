@@ -101,8 +101,13 @@ router.post("/login", (req, res) => {
         bcrypt.compare(password, user.password, (err, result) => {
             if (err) throw err;
             if (!result) return res.status(400).send("Incorrect password");
-            const token = jwt.sign({ id: user.id }, "secretkey", { expiresIn: "1h" });
-            res.send({ token });
+            const token = jwt.sign({
+                name: user.name,
+                role: user.role,
+                group: user.group,
+                modules: user.modules
+            }, "secretkey", { expiresIn: "1h" });
+           res.send({ token });
         })
     })
 
