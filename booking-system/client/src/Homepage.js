@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Paper, TextField, Button } from '@mui/material';
-
-import Calendar from './Calendar';
+import { Paper, Button } from '@mui/material';
 
 const Homepage = (props) => {
     const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
     const btnStyle = { margin: '8px 0' };
+    
+    const name = localStorage.getItem('name');
+    const role = localStorage.getItem('role');
+    const modules = localStorage.getItem('modules');
 
+    // TODO:
+    // 1. render button to navigate to the various devices depending on module
+    // 2. add instrucitonal text
     return (
         <Paper elevation={10} style={paperStyle} >
             <h2>Homepage</h2>
