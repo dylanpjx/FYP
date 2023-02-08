@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import { Routes, Route, Link, BrowserRouter as Router } from "react-router-dom";
 
 import Login from './Login';
@@ -11,7 +10,6 @@ import Zedboard from './interface/Zedboard.js';
 import Stm32 from './interface/STM32.js';
 
 import './interface/Interface.css';
-import './interface/SingleButton.css';
 
 function App() {
     return (

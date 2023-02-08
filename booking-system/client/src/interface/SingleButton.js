@@ -1,3 +1,5 @@
+import "./Singlebutton.css";
+
 const handleButtonPress = (e,buttonpressed) => {
   e.preventDefault();
   console.log(buttonpressed);
