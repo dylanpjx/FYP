@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+// TODO: Add DialogActions on inherit
 const DialogPopup = (props) => {
     return (
         <div>
@@ -26,7 +27,6 @@ const DialogPopup = (props) => {
                 <DialogActions>
                     <Button onClick={props.handleClose}>Got it!</Button>
                 </DialogActions>
-
             </Dialog>
         </div>
     );
