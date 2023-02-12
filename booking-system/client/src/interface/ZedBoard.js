@@ -1,8 +1,11 @@
+import Button from '@mui/material/Button';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Buttons from "./Buttons";
 import Switches from "./Switches";
 import Leds from "./Leds";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import SingleButton from "./SingleButton";
+import { useNavigate } from "react-router-dom";
 
 /*
 Table 12 - Push Button Connections
@@ -39,6 +42,8 @@ LD7 PL U14
 LD9 PS D5 (MIO7)
 */
 const Zedboard = () => {
+
+  let navigate = useNavigate();
 
   const ButtonNames = ["PB1","PB2"];
 
@@ -79,16 +84,29 @@ const Zedboard = () => {
   }
 
   return (
-    <main>
-      <h3>Zedboard</h3>
+    <div>
+      <Button
+            variant="contained"
+            onClick={() => navigate("/home")}
+            startIcon={ <ArrowLeftIcon /> }
+        >
+          Back
+      </Button>
+      <h3
+          style={{textAlign: "center"}}
+      >
+          Zedboard
+      </h3>
+
       <Buttons />
+
       <div className="ZedboardButtonsContainer">
         {ButtonNames.map((ButtonName) => <SingleButton name={ButtonName} key={ButtonName}/>)}
       </div>
       <Switches switchState={switchState} handleSwitchToggle={handleSwitchToggle}/>
       <Leds ledState={ledState}/>
-    </main>
+    </div>
   )
 }
 
-export default Zedboard
+export default Zedboard;

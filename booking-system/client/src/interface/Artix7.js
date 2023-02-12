@@ -1,11 +1,16 @@
 import Switches from './Switches';
+import Button from '@mui/material/Button';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Buttons from './Buttons';
 import Leds from './Leds';
 import SevenSeg from './SevenSeg';
+import { useNavigate } from "react-router-dom";
 import FileUpload from './FileUpload';
 import {useState} from 'react';
 
 const Artix7 = () => {
+    
+    let navigate = useNavigate();
 
     const switchArr = [];
     for (let i = 0; i <= 15; ++i) {
@@ -62,7 +67,16 @@ const Artix7 = () => {
 
     return (
     <main className='Artix7'>
-        <h3>Artix7</h3>
+        <Button
+            variant="contained"
+            onClick={() => navigate("/home")}
+            startIcon={ <ArrowLeftIcon /> }
+        >
+        Back
+        </Button>
+        <h3
+        style={{textAlign: "center"}}
+        >Artix7</h3>
         <Switches switchState={switchState} handleSwitchToggle={handleSwitchToggle}/>
         <Buttons/>
         <Leds ledState={ledState}/>
