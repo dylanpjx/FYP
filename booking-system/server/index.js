@@ -106,7 +106,7 @@ router.post("/login", (req, res) => {
                 role: user.role,
                 group: user.group,
                 modules: user.modules
-            }, "secretkey", { expiresIn: "1h" });
+            }, "secretkey", { expiresIn: "3h" });
            res.send({ token });
         })
     })
