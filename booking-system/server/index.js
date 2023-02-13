@@ -23,13 +23,11 @@ db.connect(function(err) {
       console.log("Successfully connected to database!");
     }
 
-    // TODO: init through bash after test
     // [id, name, matricno, group, role, username, password]
-    let createTable = `create table if not exists userdata (id int auto_increment, StudentName varchar(255) null, MatricNo varchar(255) null, Group int null, Role varchar(255) null, Username varchar(255) not null, Password varchar(255) not null, PRIMARY KEY (id))`;
+    let createTable = `create table if not exists userdata (id int auto_increment, StudentName varchar(255) not null, Module varchar(255) not null, MatricNo varchar(255) not null, Group int not null, Role varchar(255) not null, Username varchar(255) not null, Password varchar(255) not null, PRIMARY KEY (id))`;
     // [id, date, group, starttime, endtime, duration]
-    let createTable2 = `create table if not exists bookings (id int auto_increment, Date varchar(255) not null, Group int not null, Start_time varchar(255) not null, End_time varchar(255) null, Duration varchar(255) not null, PRIMARY KEY(id))`;
-    
-    
+    let createTable2 = `create table if not exists bookings (id int auto_increment, Group int not null, Start_time varchar(255) not null, End_time varchar(255) null, Duration varchar(255) not null, PRIMARY KEY(id))`;
+
     db.query(createTable, function(err, results, fields) {
       if (err) {
         console.log(err.message);
@@ -42,8 +40,7 @@ db.connect(function(err) {
     });
   
 });
-// TODO
-//add Date (of the booking)
+
 const bookingTimeCheck = async (req, res) => {
     const event = req.body
     const group = event.grp_id;
@@ -70,16 +67,20 @@ const bookingTimeCheck = async (req, res) => {
     return res.status(200).json({ message: "Booking succesful" });
 };
 
+// db.connect()
 
+// db.query()
+
+//add the need to include StudentName, Module, MatricNo, Group, Role when registering
 router.post("/register", (req, res) => {
     const { username, password } = req.body;
     const saltRounds = 10;
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
     if (err) throw err;
-    const sql = `INSERT INTO userdata (StudentName, MatricNo, Group, Role, Username, Password) VALUES ("${name}", "${matricno}", "${group}", "${role}", "${username}", "${password}")`; // TODO: add query
+    const sql = `INSERT INTO userdata (StudentName, Module, MatricNo, Group, Role, Username, Password) VALUES ("${name}", "${module}", "${matricno}", "${group}", "${role}", "${username}", "${password}")`;
 
-    connection.query(sql, (err, result) => {
+    db.query(sql, (err, result) => {
       if (err) throw err;
       res.send('User registered successfully');
     });
@@ -88,7 +89,7 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
-    const sql = `SELECT (Password) FROM userdata WHERE Username = ${username}`
+    const sql = `SELECT (Password) FROM userdata WHERE Username = ${username}`;
 
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -126,10 +127,27 @@ app.use(cors({
     }
 }));
 
+//fetch data from table and send to client 
 app.get("/calendar_data", (req, res) => {
-    // TODO
-    const events = require('./tmp_calendar_data.js');
-    res.json(events)
+    const sql = `SELECT (id, Group, Start_time, End_time, Duration) FROM bookings`;
+    db.query(sql, (err, result) => {
+      if (err) throw err;
+      
+      let data = [];
+      
+      for (let i = 0; i < result.rows.length; i++) {
+          let row = result.rows[i];
+          let jsonRow = {
+              event_id: row.id,
+              start: row.Start_time,
+              end: row.End_time,
+              grp_id: row.Group
+              
+          };
+          data.push(jsonRow);
+      }
+      res.json(data);
+    });
 });
 
 app.put("/calendar_data/:id", (req, res) => {
