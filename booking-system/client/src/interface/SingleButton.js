@@ -1,4 +1,4 @@
-import "./Singlebutton.css";
+import './SingleButton.css';
 
 const handleButtonPress = (e,buttonpressed) => {
   e.preventDefault();
