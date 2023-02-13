@@ -1,21 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Grid, Paper, Avatar, TextField, Button } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { FormControlLabel, RadioGroup, Radio} from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
-
+import { AuthContext } from './AuthProvider';
 
 const Login = () => {
     const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
     const avatarStyle = { backgroundColor: '#1bbd7e' };
     const btnStyle = { margin: '8px 0' };
+    let navigate = useNavigate();
+    
+    const { login } = useContext(AuthContext);
 
     // Submitted fields
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [userRole, setUserRole] = useState('Student');
+    
+    const onLogin = async (e) => {
+        e.preventDefault();
 
-    // TODO: add authprovider login and logout here
+        const success = await login(username, password);
+        if (success)
+            return navigate('/home');
+    }
+
     return (
         <div>
             <Grid>
@@ -25,7 +36,7 @@ const Login = () => {
                         <h2>Sign In</h2>
                     </Grid>
 
-                    <form onSubmit={login}> 
+                    <form onSubmit={onLogin}>
                     <Grid 
                         container 
                         direction='column'
@@ -59,17 +70,6 @@ const Login = () => {
                                     fullWidth 
                                     required 
                                 />
-                            </Grid>
-
-                            <Grid item>
-                                <RadioGroup
-                                    name='userGroup'
-                                    value={userRole}
-                                    onChange={(e)=>{ setUserRole(e.currentTarget.value)}}>    
-                                    <FormControlLabel value='Student' control={<Radio />} label='Student' />
-                                    <FormControlLabel value='Lecturer' control={<Radio />} label='Lecturer' />
-                                    <FormControlLabel value='Admin' control={<Radio />} label='Admin' />
-                                </RadioGroup>
                             </Grid>
 
                             <Grid item>
