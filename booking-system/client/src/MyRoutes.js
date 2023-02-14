@@ -3,6 +3,7 @@ import { Navigate, Routes, Route, BrowserRouter as Router, useLocation } from "r
 
 import { AuthContext } from './AuthProvider';
 import Login from './Login';
+import Register from './Register';
 import Homepage from './Homepage';
 import Calendar from './Calendar';
 
@@ -24,11 +25,12 @@ const RequireAuth = ({ children }) => {
 }
 
 
-function MyRoutes() {
+const MyRoutes = () => {
     return (
         <Router>
             <Routes>
                 <Route path="/" element={<Login />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="home" element={
                     <RequireAuth>
                         <Homepage />

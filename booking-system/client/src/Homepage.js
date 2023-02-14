@@ -1,16 +1,26 @@
 import React, { useContext } from 'react';
-import { Link } from "react-router-dom";
-import { Paper, Button, ButtonGroup } from '@mui/material';
-import { useNavigate } from "react-router-dom";
+import { 
+    Box,
+    Button,
+    ButtonGroup,
+    Container,
+    CssBaseline,
+    Grid,
+    Paper,
+} from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { useNavigate, Link } from "react-router-dom";
 
 import { AuthContext } from './AuthProvider';
 
 const Homepage = (props) => {
-    const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
-    const buttonGroupStyle = { display: "block", padding: 10 };
-    const buttonStyle = { };
+    const paperStyle = { display: "flex", flexDirection: "column", padding: 20, margin: "20px auto" };
+    const buttonGroupStyle = { display: "block", marginBottom: 80 };
 
     let navigate = useNavigate();
+    const theme = createTheme();
     
     const { logout } = useContext(AuthContext);
 
@@ -33,7 +43,6 @@ const Homepage = (props) => {
                                 color='primary'
                                 variant='contained'
                                 fullWidth
-                                style={ buttonStyle }
                             >
                                 EE4218
                             </Button>
@@ -46,7 +55,6 @@ const Homepage = (props) => {
                                 color='primary'
                                 variant='contained'
                                 fullWidth
-                                style={ buttonStyle }
                             >
                                 EE2026
                             </Button>
@@ -59,7 +67,6 @@ const Homepage = (props) => {
                                 color='primary'
                                 variant='contained'
                                 fullWidth
-                                style={ buttonStyle }
                             >
                                 EE2028
                             </Button>
@@ -71,41 +78,76 @@ const Homepage = (props) => {
         });
     }
 
-    // TODO: add instructional text
     return (
-        <Paper elevation={10} style={paperStyle} >
-            <h2>Homepage</h2>
-            <h3> {name} ({role}) </h3>
-
-            <ButtonGroup 
-                orientation="vertical"
-                variant="contained"
-                style= {buttonGroupStyle}
+        <div>
+        <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+        <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
             >
-                <Link to="/calendar">
+                <h2>Homepage</h2>
+
+                <Paper elevation={3} style={paperStyle} >
+
+                    <Grid container columnSpacing={1} direction="row" alignItems="center"> 
+                        <Grid item>
+                            <PersonIcon />
+                        </Grid>
+                        <Grid item marginBottom="6px">
+                            <h3>{name} ({role}) </h3>
+                        </Grid>
+                    </Grid>
+
+                    <Grid container rowSpacing={3} direction="column" alignItems="center"> 
+                        <Grid item>
+                            <p>Book a timeslot using the calendar:</p>
+                            <Link to="/calendar">
+                                <Button
+                                    color='primary'
+                                    variant='contained'
+                                    fullWidth
+                                >
+                                    Calendar
+                                </Button>
+                            </Link>
+                        </Grid>
+
+                        <Grid item>
+                            <p>Access the relevant FPGA/MCU based on the module you are enrolled in:</p>
+                            <ButtonGroup 
+                                orientation="vertical"
+                                variant="contained"
+                                style= {buttonGroupStyle}
+                            >
+                                {gen_module_links(modules)}
+                            </ButtonGroup>
+
+                        </Grid>
+                    </Grid>
+
+
+
                     <Button
-                        color='primary'
+                        type='submit'
+                        color='secondary'
                         variant='contained'
+                        onClick={onLogout}
                         fullWidth
-                        style={ buttonStyle }
                     >
-                        Book a timeslot
+                        Sign out
                     </Button>
-                </Link>
-                {gen_module_links(modules)}
-
-            </ButtonGroup>
-
-            <Button
-                type='submit'
-                color='secondary'
-                variant='contained'
-                onClick={onLogout}
-                fullWidth
-            >
-                Sign out
-            </Button>
-        </Paper>
+                </Paper>
+            </Box>
+        </Container>
+        </ThemeProvider>
+        </div>
     );
 }
 
