@@ -471,7 +471,7 @@ code {
 }
 
 .check_box + label{
-  background:url('/images/off-button.png') no-repeat;
+  background:url('/src/images/off-button.png') no-repeat;
   height: 32px;
   width: 32px;
   display: inline-block;
@@ -479,7 +479,7 @@ code {
 }
 
 .check_box:checked + label{
-  background:url('/images/on-button.png') no-repeat;
+  background:url('/src/images/on-button.png') no-repeat;
   height: 32px;
   width: 32px;
   display: inline-block;
