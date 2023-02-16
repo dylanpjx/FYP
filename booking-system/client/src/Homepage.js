@@ -92,7 +92,7 @@ const Homepage = (props) => {
                 justifyContent: 'center',
               }}
             >
-                <h2>Homepage</h2>
+                <h1>Homepage</h1>
 
                 <Paper elevation={3} style={paperStyle} >
 

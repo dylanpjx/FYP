@@ -37,7 +37,6 @@ const Login = () => {
             return navigate('/home');
     }
 
-    // TODO: implement REMEMBERME when there's time
     return (
         <div>
             <ThemeProvider theme={theme}>
@@ -79,10 +78,6 @@ const Login = () => {
                       id="password"
                       autoComplete="current-password"
                       onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <FormControlLabel
-                      control={<Checkbox value="remember" color="primary" />}
-                      label="Remember me"
                     />
                     <Button
                       type="submit"

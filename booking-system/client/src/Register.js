@@ -8,11 +8,16 @@ import {
     Container,
     CssBaseline,
     Grid,
+    IconButton,
+    InputAdornment,
     Link,
     TextField,
     Typography
 } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const BACKEND_URL = 'http://localhost:5000';
@@ -22,14 +27,18 @@ const Register = () => {
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
-    const [confirmPasswordError, setConfirmPasswordError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (e) => {
+        e.preventDefault();
+    };
 
     const validateEmail = () => {
-        console.log("email");
         if (!email) {
             setEmailError("Email is required");
             return false;
@@ -43,7 +52,6 @@ const Register = () => {
     };
 
     const validatePassword = () => {
-        console.log("pass");
         if (!password) {
             setPasswordError("Password is required");
             return false;
@@ -56,24 +64,11 @@ const Register = () => {
         }
     }; 
 
-    const validateConfirmPassword = () => {
-        console.log("confirm");
-        if (!confirmPassword) {
-            setConfirmPasswordError("Please confirm your password");
-            return false;
-        } else if (password !== confirmPassword) {
-            setConfirmPasswordError("Passwords do not match");
-            return false;
-        } else {
-            setConfirmPasswordError("");
-            return true;
-        }
-    };
 
     const onRegister = async (e) => {
         e.preventDefault();
-        
-        if (validateEmail() && validatePassword() && validateConfirmPassword()) {
+
+        if (validateEmail() && validatePassword()) {
             try {
                 const res = await axios.post(`${BACKEND_URL}/register`, {
                     email, password
@@ -84,7 +79,8 @@ const Register = () => {
             };
         }
     }
-
+    
+    // TODO: return message from res
     return (
         <div>
             <ThemeProvider theme={theme}>
@@ -99,7 +95,7 @@ const Register = () => {
                   }}
                 >
                   <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <LockOutlinedIcon />
+                    <KeyOutlinedIcon />
                   </Avatar>
                   <Typography component="h1" variant="h5">
                     Sign up
@@ -108,6 +104,8 @@ const Register = () => {
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
                         <TextField
+                          error={emailError}
+                          helperText={emailError}
                           required
                           fullWidth
                           id="email"
@@ -116,49 +114,34 @@ const Register = () => {
                           autoComplete="email"
                           onChange={(e) => setEmail(e.target.value)}
                         />
-                      {
-                          emailError && 
-                          <Alert severity="error" variant="outlined">
-                              {emailError}
-                          </Alert>
-                      }
                       </Grid>
 
                       <Grid item xs={12}>
                         <TextField
+                          error={passwordError}
+                          helperText={passwordError}
                           required
                           fullWidth
                           name="password"
                           label="Password"
-                          type="password"
+                          type={showPassword ? 'text' : 'password'}
                           id="password"
                           autoComplete="new-password"
                           onChange={(e) => setPassword(e.target.value)}
+                          InputProps={{
+                              endAdornment:
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                          }}
                         />
-                      {
-                          passwordError && 
-                          <Alert severity="error" variant="outlined">
-                              {passwordError}
-                          </Alert>
-                      }
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          required
-                          fullWidth
-                          name="repassword"
-                          label="Re-enter Password"
-                          type="password"
-                          id="repassword"
-                          autoComplete="new-password"
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                      {
-                          confirmPasswordError && 
-                          <Alert severity="error" variant="outlined">
-                              {confirmPasswordError}
-                          </Alert>
-                      }
                       </Grid>
                     </Grid>
                     <Button
