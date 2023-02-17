@@ -7,10 +7,6 @@
 
 ## Web
 
-1. Login page
-2. Calendar page
-3. FPGA/MCU control access page
-
 To run the client (for testing):
 ```sh
 cd booking-system/client
@@ -22,3 +18,10 @@ To run the server (for testing):
 cd booking-system/server
 npm run dev
 ```
+
+TODO:
+
+- FPGA/MCU pages require a check if there's a valid booking on access
+- Register page (Add password visibility toggle)
+- `Remember Me` on login
+- `Forget password?` on login
