@@ -104,7 +104,7 @@ const Register = () => {
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
                         <TextField
-                          error={emailError}
+                          error={emailError !== ""}
                           helperText={emailError}
                           required
                           fullWidth
@@ -118,7 +118,7 @@ const Register = () => {
 
                       <Grid item xs={12}>
                         <TextField
-                          error={passwordError}
+                          error={passwordError !== ""}
                           helperText={passwordError}
                           required
                           fullWidth
