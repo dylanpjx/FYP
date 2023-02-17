@@ -117,6 +117,14 @@ const Calendar = () => {
                 getRemoteEvents={fetchRemote}
                 onConfirm={handleConfirm}
                 onDelete={handleDelete}
+                fields={[
+                    {
+                        name: "title",
+                        type: "input",
+                        default: localStorage.getItem("group"),
+                        config: { label: "testTitle", disabled: true }
+                    }
+                ]}
             />
 
             <DialogPopup

@@ -6,6 +6,7 @@ import Login from './Login';
 import Register from './Register';
 import Homepage from './Homepage';
 import Calendar from './Calendar';
+import NotFound from './NotFound';
 
 import Artix7 from './interface/Artix7';
 import Zedboard from './interface/ZedBoard';
@@ -56,6 +57,7 @@ const MyRoutes = () => {
                         <Stm32 />
                     </RequireAuth>
                 } />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
     )
