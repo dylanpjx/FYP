@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const router = express.Router()
 const cors = require('cors')
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const allowedOrigins = ['http://localhost:3000']
 const TIME_LIMIT = 2 // in hours
@@ -24,9 +24,9 @@ db.connect(function(err) {
     }
 
     // [id, name, matricno, group, role, username, password]
-    let createTable = `create table if not exists userdata (id int auto_increment, StudentName varchar(255) not null, Module varchar(255) not null, MatricNo varchar(255) not null, Group int not null, Role varchar(255) not null, Username varchar(255) not null, Password varchar(255) not null, PRIMARY KEY (id))`;
+    let createTable = `create table if not exists userdata (id int auto_increment, StudentName varchar(255) not null, Module varchar(255) not null, MatricNo varchar(255) not null, Grp int not null, Role varchar(255) not null, Username varchar(255) not null, Password varchar(255) not null, PRIMARY KEY (id))`;
     // [id, date, group, starttime, endtime, duration]
-    let createTable2 = `create table if not exists bookings (id int auto_increment, Group int not null, Start_time varchar(255) not null, End_time varchar(255) null, Duration varchar(255) not null, PRIMARY KEY(id))`;
+    let createTable2 = `create table if not exists bookings (id int auto_increment, Grp int not null, Start_time varchar(255) not null, End_time varchar(255) null, Duration varchar(255) not null, PRIMARY KEY(id))`;
 
     db.query(createTable, function(err, results, fields) {
       if (err) {
