@@ -154,6 +154,9 @@ app.put("/calendar_data/:id", (req, res) => {
     return bookingTimeCheck(req, res)
 });
 
+const stm32Router = require('./stm32Router')
+app.use("/stm32", stm32Router)
+
 app.listen(5000, () => console.log("Server started on port 5000"));
 
 
