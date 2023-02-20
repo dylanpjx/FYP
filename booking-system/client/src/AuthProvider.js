@@ -37,7 +37,8 @@ const AuthProvider = ({ children }) => {
             localStorage.setItem('name', decoded.name);
             localStorage.setItem('role', decoded.role);
             localStorage.setItem('group', decoded.group);
-            localStorage.setItem('modules', JSON.stringify(decoded.modules));
+            console.log(decoded.modules);
+            localStorage.setItem('modules', decoded.modules);
               
             // TODO: add prompt to extend session instead of hard setting the eiry time
             // check for session expiry
@@ -51,15 +52,15 @@ const AuthProvider = ({ children }) => {
       }
     }, [token]);
 
-    const login = async (username, password) => {
+    const login = async (email, password) => {
         try {
             const res = await axios.post(`${BACKEND_URL}/login`, {
-                username,
+                email,
                 password,
             });
             storeToken(res.data.token);
             setAuthenticated(true);
-            // return true;
+            return true;
         } catch(err) {
             console.error('Error:', err);
             setAuthenticated(false);
@@ -67,15 +68,8 @@ const AuthProvider = ({ children }) => {
             setDialogOpen(true);
             setDialogTitle("Incorrect credentials");
             setDialogMessage("Incorrect user ID or password. Type the correct user ID and password, and try again.");
-            // return false;
+            return false;
         }
-        // test code: remove after
-        localStorage.setItem('name', "Dylan");
-        localStorage.setItem('group', "1");
-        localStorage.setItem('modules', JSON.stringify(["EE2026","EE4218"]));
-        localStorage.setItem('role', "Student");
-        setAuthenticated(true);
-        return true
     }
 
     const logout = () => {

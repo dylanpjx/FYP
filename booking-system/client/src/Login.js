@@ -26,13 +26,13 @@ const Login = () => {
     const { login } = useContext(AuthContext);
 
     // Submitted fields
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
     const onLogin = async (e) => {
         e.preventDefault();
 
-        const success = await login(username, password);
+        const success = await login(email, password);
         if (success)
             return navigate('/home');
     }
@@ -65,7 +65,7 @@ const Login = () => {
                       label="Email Address"
                       name="email"
                       autoComplete="email"
-                      onChange={(e) => setUsername(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                       autoFocus
                     />
                     <TextField
