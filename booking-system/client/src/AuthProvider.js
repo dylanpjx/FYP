@@ -37,7 +37,6 @@ const AuthProvider = ({ children }) => {
             localStorage.setItem('name', decoded.name);
             localStorage.setItem('role', decoded.role);
             localStorage.setItem('group', decoded.group);
-            console.log(decoded.modules);
             localStorage.setItem('modules', decoded.modules);
               
             // TODO: add prompt to extend session instead of hard setting the eiry time

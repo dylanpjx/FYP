@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 
 const router = express.Router()
-app.use('/', router);
 
 const bcrypt = require('bcryptjs')
 const saltRounds = 10;
@@ -24,12 +23,13 @@ app.use(cors({
     origin: function (origin, callback) {
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
-            var msg = 'The CORS policy for this site does not allow access fro the specified origin'
+            var msg = 'The CORS policy for this site does not allow access from the specified origin'
             return callback(new Error(msg), false);
         }
         return callback(null, true);
     }
 }));
+app.use('/', router);
 
 
 const sequelize = new Sequelize('fyp', 'root', 'root', {
@@ -51,7 +51,7 @@ router.post('/register', (req, res) => {
 
 });
 
-app.post('/login', (req, res) => {
+router.post('/login', (req, res) => {
     const { email, password } = req.body;
     User.findOne({
         where: {
