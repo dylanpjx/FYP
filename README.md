@@ -19,9 +19,16 @@ cd booking-system/server
 npm run dev
 ```
 
+Docker
+```sh
+docker image ls
+docker run [IMAGE]
+
+# To get IP
+docker ps
+docker inspect [CONTAINER ID]
+```
+
 TODO:
 
 - FPGA/MCU pages require a check if there's a valid booking on access
-- Register page (Add password visibility toggle)
-- `Remember Me` on login
-- `Forget password?` on login
