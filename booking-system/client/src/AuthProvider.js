@@ -20,36 +20,46 @@ const AuthProvider = ({ children }) => {
         setDialogOpen(false);
     }
 
-    const [token, setToken] = useState(null);
-    const [userAuthenticated, setAuthenticated] = useState(false);
+    const userFromToken = (token) => {
+        try {
+            const decoded = decodeToken(token);
+            const currentTime = Math.floor(Date.now() / 1000);
+            if (decoded.exp < currentTime) {
+                return null;
+            }
+            return { ...decoded };
+        } catch(err) {
+            return null;
+        }
+    }
+    const [user, setUser] = useState(() => {
+        // Check if localStorage has valid token
+        const maybeToken = localStorage.getItem('token');
+        if (!maybeToken) {
+            return null;
+        }
+        return userFromToken(maybeToken);
+    });
+    const [userAuthenticated, setAuthenticated] = useState(() => {
+        return (user !== null);
+    });
 
     const storeToken = (tok) => {
         localStorage.setItem('token', tok);
-        setToken(tok);
+        setUser(userFromToken(tok));
     }
     
-    // Refresh upon `token` change
+    // Refresh upon `user` change
     useEffect(() => {
-      if (token) {
-        try {
-            // decode token and save info in localStorage
-            const decoded = decodeToken(token);
-            localStorage.setItem('name', decoded.name);
-            localStorage.setItem('role', decoded.role);
-            localStorage.setItem('group', decoded.group);
-            localStorage.setItem('modules', decoded.modules);
-              
-            // TODO: add prompt to extend session instead of hard setting the eiry time
-            // check for session expiry
-            const currentTime = Math.floor(Date.now() / 1000);
-            if (decoded.exp < currentTime) {
-                setAuthenticated(false);
-            }
-        } catch (err) {
+        console.log(localStorage.getItem('token'));
+        console.log(user, userAuthenticated);
+        if (user === null) {
+            console.log('proc');
             setAuthenticated(false);
+        } else {
+            setAuthenticated(true);
         }
-      }
-    }, [token]);
+    }, [user]);
 
     const login = async (email, password) => {
         try {
@@ -81,6 +91,7 @@ const AuthProvider = ({ children }) => {
             value={{
                 login,
                 logout,
+                user,
                 userAuthenticated
             }}
         >
