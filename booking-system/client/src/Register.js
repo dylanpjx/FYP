@@ -42,8 +42,8 @@ const Register = () => {
         if (!email) {
             setEmailError("Email is required");
             return false;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            setEmailError("Email is invalid");
+        } else if (!/^e\d{7}@u\.nus\.edu$/.test(email)) {
+            setEmailError("Email is invalid, use NUS email without alias");
             return false;
         } else {
             setEmailError("");
@@ -70,7 +70,7 @@ const Register = () => {
 
         if (validateEmail() && validatePassword()) {
             try {
-                const res = await axios.post(`${BACKEND_URL}/register`, {
+                const res = await axios.post(`${BACKEND_URL}/user`, {
                     email, password
                 });
                 setMessage(res.data.message);
@@ -109,7 +109,7 @@ const Register = () => {
                           required
                           fullWidth
                           id="email"
-                          label="Email Address"
+                          label="NUS Email"
                           name="email"
                           autoComplete="email"
                           onChange={(e) => setEmail(e.target.value)}
