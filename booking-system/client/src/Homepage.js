@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { 
     Box,
     Button,
@@ -22,11 +22,7 @@ const Homepage = (props) => {
     let navigate = useNavigate();
     const theme = createTheme();
     
-    const { logout } = useContext(AuthContext);
-
-    const name = localStorage.getItem('name');
-    const role = localStorage.getItem('role');
-    const modules = JSON.parse(localStorage.getItem('modules'));
+    const { user, logout } = useContext(AuthContext);
 
     const onLogout = () => {
         logout();
@@ -38,7 +34,7 @@ const Homepage = (props) => {
             switch (module) {
                 case "EE4218":
                     return (
-                        <Link to="/zedboard">
+                        <Link to="/zedboard" key="zedboard">
                             <Button
                                 color='primary'
                                 variant='contained'
@@ -50,7 +46,7 @@ const Homepage = (props) => {
                     );
                 case "EE2026":
                     return (
-                        <Link to="/artix">
+                        <Link to="/artix" key="artix">
                             <Button
                                 color='primary'
                                 variant='contained'
@@ -62,7 +58,7 @@ const Homepage = (props) => {
                     )
                 case "EE2028":
                     return (
-                        <Link to="/stm32">
+                        <Link to="/stm32" key="stm32">
                             <Button
                                 color='primary'
                                 variant='contained'
@@ -101,7 +97,7 @@ const Homepage = (props) => {
                             <PersonIcon />
                         </Grid>
                         <Grid item marginBottom="6px">
-                            <h3>{name} ({role}) </h3>
+                            <h3>{user.name} ({user.role})</h3>
                         </Grid>
                     </Grid>
 
@@ -126,7 +122,7 @@ const Homepage = (props) => {
                                 variant="contained"
                                 style= {buttonGroupStyle}
                             >
-                                {gen_module_links(modules)}
+                                {gen_module_links(JSON.parse(user.modules))}
                             </ButtonGroup>
 
                         </Grid>

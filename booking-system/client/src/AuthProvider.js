@@ -51,10 +51,7 @@ const AuthProvider = ({ children }) => {
     
     // Refresh upon `user` change
     useEffect(() => {
-        console.log(localStorage.getItem('token'));
-        console.log(user, userAuthenticated);
         if (user === null) {
-            console.log('proc');
             setAuthenticated(false);
         } else {
             setAuthenticated(true);
