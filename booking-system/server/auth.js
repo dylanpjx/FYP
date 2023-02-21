@@ -37,11 +37,12 @@ const handleRegister = async (req, res) => {
         for (const userCsvFile of userCsvFiles) {
             const fileData = fs.readFileSync(`${userCsvDir}/${userCsvFile}`, 'utf8');
 
-            userData = await checkForMatch(email, fileData);
-            if (userData)
+            const match = await checkForMatch(email, fileData);
+            if (match)
+                userData = match;
                 modules.push(path.parse(userCsvFile).name);
         }
-        
+
         userData = { ...userData, modules: JSON.stringify(modules) };
 
         if (!userData) {
