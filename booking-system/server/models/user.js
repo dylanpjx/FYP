@@ -10,7 +10,7 @@ User.init({
     },
     group: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     role: {
         type: DataTypes.STRING,
