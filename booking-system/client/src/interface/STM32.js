@@ -10,7 +10,13 @@ const BACKEND_URL = 'http://localhost:5000';
 
 const sendSTM32 = async (buttonName, buttonState) => {
   try {
-    const response = await axios.post(BACKEND_URL+'/stm32', { button: buttonName, value: buttonState });
+    const token = localStorage.getItem('token');
+    const response = await axios.post(
+      BACKEND_URL+'/stm32', 
+      { button: buttonName, value: buttonState },
+      { headers: {"Authorization" : `Bearer ${token}`} }
+      
+    );
     console.log(buttonName, buttonState, response.data)
   } catch (error) {
     console.log(error);
