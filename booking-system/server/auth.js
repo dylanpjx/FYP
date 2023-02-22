@@ -17,13 +17,22 @@ const handleRegister = async (req, res) => {
         // Check db if user already exists
         const existingUser = await User.findOne({ where: { email }})
         if (existingUser) {
-            return res.status(400).send('User with this email already exists');
+            return res.status(400).send('User with this email already exists.');
         }
 
         const checkForMatch = (email, fileData) => {
             return new Promise((resolve) => {
-                parse(fileData, { columns: true, bom: true }, (err, records) => {
-                    const match = records.find((record) => record.email === email);
+                parse(fileData, { 
+                    columns: true,
+                    bom: true,
+                    cast: (value, context) => {
+                        if (value === '') {
+                            return null;
+                        }
+                        return value;
+                    }
+                }, (err, records) => {
+                    let match = records.find((record) => record.email === email);
                     resolve(match);
                 });
             });
@@ -47,7 +56,7 @@ const handleRegister = async (req, res) => {
         userData = { ...userData, modules: JSON.stringify(modules) };
 
         if (!userData) {
-            res.status(400).send('User with this email not found');
+            res.status(400).send('User with this email not found.');
         }
         
         // Hash password and create new user
@@ -62,11 +71,11 @@ const handleRegister = async (req, res) => {
             email,
             password: hashedPassword,
         });
-        return res.status(201).send(`User ${newUser.name} created`);
+        return res.status(201).send(`User ${newUser.name} created.`);
 
     } catch (err) {
         console.error(err);
-        return res.status(500).send('Error registering user');
+        return res.status(500).send('Error registering user.');
     }
 };
 
