@@ -1,10 +1,10 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../connection')
 
-class CalendarData extends Model{}
+class Event extends Model{}
 
-CalendarData.init({
-    eventId: {
+Event.init({
+    event_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -22,7 +22,7 @@ CalendarData.init({
         type: DataTypes.DATE,
         allowNull: false
     },
-    groupId: {
+    group_id: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
@@ -32,8 +32,8 @@ CalendarData.init({
     }
 }, {
     sequelize,
-    modelName: 'CalendarData',
+    modelName: 'Event',
     timestamps: false
 });
 
-module.exports = CalendarData;
+module.exports = Event;

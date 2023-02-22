@@ -7,7 +7,7 @@ const parse = require('csv-parse').parse;
 
 const jwt = require('jsonwebtoken');
 
-const User = require('./models/user');
+const User = require('./models/User');
 const userCsvDir = './student_data/'
 
 const handleRegister = async (req, res) => {
