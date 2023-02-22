@@ -11,6 +11,7 @@ import {
     IconButton,
     InputAdornment,
     Link,
+    Snackbar,
     TextField,
     Typography
 } from '@mui/material';
@@ -27,10 +28,13 @@ const Register = () => {
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
-    const [emailError, setEmailError] = useState("");
-    const [passwordError, setPasswordError] = useState("");
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+
+    const [severity, setSeverity] = useState('');
+    const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -64,7 +68,6 @@ const Register = () => {
         }
     }; 
 
-
     const onRegister = async (e) => {
         e.preventDefault();
 
@@ -73,14 +76,23 @@ const Register = () => {
                 const res = await axios.post(`${BACKEND_URL}/user`, {
                     email, password
                 });
-                setMessage(res.data.message);
+                console.log(res.data);
+                setSeverity('success');
+                setMessage(res.data);
+                setOpen(true);
             } catch (err) {
-                setMessage(err.response.data.message);
+                console.log(err.response.data);
+                setSeverity('error');
+                setMessage(err.response.data);
+                setOpen(true);
             };
         }
     }
+
+    const handleClose = () => {
+        setOpen(false);
+    }
     
-    // TODO: return message from res
     return (
         <div>
             <ThemeProvider theme={theme}>
@@ -152,6 +164,28 @@ const Register = () => {
                     >
                       Sign Up
                     </Button>
+                    <Snackbar
+                        anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                    >
+                        <Alert severity={severity}>
+                            {severity === "success" ||
+                             message === "User with this email already exists."? (
+                                <div>
+                                    {message}
+                                    <Link href='/' style={{ padding: 8 }}>
+                                        Go to login page
+                                    </Link>
+                                </div>
+                            ) : (
+                                message
+                            )}
+                        </Alert>
+                    </Snackbar>
+
+                
                     <Grid container justifyContent="flex-end">
                       <Grid item>
                         <Link href="/" variant="body2">
