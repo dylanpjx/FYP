@@ -49,7 +49,7 @@ router.post('/user', auth.handleRegister);
 router.post('/login', auth.handleLogin);
 
 const stm32Router = require('./stm32Router')
-app.use("/stm32", stm32Router)
+router.post('/stm32', stm32Router.handleSTM32)
 
 app.listen(5000, () => console.log("Server started on port 5000"));
 

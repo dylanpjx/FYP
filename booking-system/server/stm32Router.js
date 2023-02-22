@@ -7,7 +7,7 @@ const router = express.Router()
 //     baudRate: 57600 
 // });
 
-router.post("/", (req, res) => {
+const handleSTM32 = (req, res) => {
     let button = req.body.button
     let value = req.body.value
 
@@ -32,14 +32,26 @@ router.post("/", (req, res) => {
             // })
             console.log(`Action: ${value}`)
             break
-        case "MOVEMENT":
-            // port.write(Uint8Array.from([value]), (err) => {
-            //     if (err) return console.log('Error: ',err.message)
-            // })
-            console.log(`Movement: ${value}`)
+        case "X-":
+            console.log(`Orientation: ${button} to ${value}` )
+            break
+        case "X+":
+            console.log(`Orientation: ${button} to ${value}`)
+            break
+        case "Y-":
+            console.log(`Orientation: ${button} to ${value}`)
+            break
+        case "Y+":
+            console.log(`Orientation: ${button} to ${value}`)
+            break
+        case "Z-":
+            console.log(`Orientation: ${button} to ${value}`)
+            break
+        case "Z+":
+            console.log(`Orientation: ${button} to ${value}`)
             break
     }
     res.status(200).send("success")
-})
+}
 
-module.exports = router
+exports.handleSTM32 = handleSTM32
