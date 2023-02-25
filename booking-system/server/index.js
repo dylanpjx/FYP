@@ -51,6 +51,12 @@ router.post('/login', auth.handleLogin);
 const stm32Router = require('./stm32Router')
 const jwt = require('jsonwebtoken');
 
+const calendar = require('./calendar');
+router.get('/calendar_data/get', calendar.getCalendarData);
+router.post('/calendar_data/create', calendar.handleCreate);
+router.put(`/calendar_data/edit`, calendar.handleEdit);
+router.delete('/calendar_data/delete', calendar.handleDelete);
+
 const authMiddleware = async (req, res, next) => {
   try {
     const token = req.header('Authorization').replace('Bearer ','')
