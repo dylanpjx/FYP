@@ -81,7 +81,7 @@ const Register = () => {
                 setMessage(res.data);
                 setOpen(true);
             } catch (err) {
-                console.log(err.response.data);
+                console.error(err.response.data);
                 setSeverity('error');
                 setMessage(err.response.data);
                 setOpen(true);
