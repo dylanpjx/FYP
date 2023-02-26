@@ -10,7 +10,6 @@ const cors = require('cors');
 const mysql = require('mysql2');
 const { Sequelize } = require("sequelize");
 
-
 const allowedOrigins = ['http://localhost:3000']
 
 app.use(cors({
@@ -43,6 +42,11 @@ router.get('/', (req, res) => {
   res.send('Hello World!')
 });
 
+const calendar = require('./calendar');
+router.get('/calendar', calendar.getEvents);
+router.delete('/calendar/:id', calendar.deleteEvent);
+router.post('/calendar', calendar.createEvent);
+// router.put('/calendar');
 
 const auth = require('./auth');
 router.post('/user', auth.handleRegister);
