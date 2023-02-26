@@ -25,7 +25,7 @@ For testing, you could add your own name in userData and use that as an admin ac
 
 ```
 SHOW schemas; /* Show all active DBs */
-CREATE DATABASE fyp;
+CREATE DATABASE fyp; /* or USE fyp */
 
 /* After running `node seed_db.js` */
 SELECT * from Events;
