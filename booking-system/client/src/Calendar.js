@@ -56,33 +56,28 @@ const Calendar = () => {
             const userRole = user.role;
 
             if (action === "edit") {
-                // Check if user has edit permissions
-                if (userGroup === event.grp_id ||
-                    userRole === "admin") {
-                    url = `${BACKEND_URL}/calendar/${event.event_id}`;
-                    method = "PUT";
-                } else {
-                    setDialogOpen(true);
-                    setDialogTitle("You do not have the relevant permissions");
-                    setDialogMessage("Not from the correct group/Not an admin");
-                    return null;
-                }
+                url = `${BACKEND_URL}/calendar/${event.event_id}`;
+                method = "PUT";
+
+                event = {
+                    ...event,
+                    group_id: userGroup,
+                    role: userRole
+                };
             } else if (action === "create") {
                 url = `${BACKEND_URL}/calendar`;
                 method = "POST";
-                event_color = GROUP_COLORS[userGroup - 1]
-            } else {
-                return null;
-            }
+                event_color = GROUP_COLORS[userGroup - 1];
 
-            if (event_color) {
                 event = {
                     ...event,
                     group_id: userGroup,
                     color: event_color
-                }
+                };
+            } else {
+                return;
             }
-
+            
             const res = await axios({
                 method,
                 url,
@@ -97,8 +92,12 @@ const Calendar = () => {
             };
         } catch (err) {
             console.error(err.response.data);
+            setDialogTitle("Unable to create/edit event");
             setDialogMessage(err.response.data);
             setDialogOpen(true);
+
+            if (action === "create")
+                return {...event, start: null, end: null};
         }
     }
 
@@ -108,6 +107,30 @@ const Calendar = () => {
             return res.data;
         } catch (err) {
             console.error("Error:", err)
+        }
+    }
+
+    // TODO: Fix conflict resolution
+    const handleDrag = async (droppedOn, updatedEvent, originalEvent) => {
+        console.log(updatedEvent);
+        try {
+            const userGroup = user.group;
+            const userRole = user.role;
+            const res = await axios.put(`${BACKEND_URL}/calendar/${updatedEvent.event_id}`,
+                {
+                    ...updatedEvent,
+                    group_id: userGroup,
+                    role: userRole
+
+                });
+            return updatedEvent;
+
+        } catch(err) {
+            console.error("Error:", err);
+            setDialogTitle("Unable to edit event");
+            setDialogMessage(err.response.data);
+            setDialogOpen(true);
+            return originalEvent;
         }
     }
 
@@ -125,6 +148,7 @@ const Calendar = () => {
                 getRemoteEvents={fetchRemote}
                 onConfirm={handleConfirm}
                 onDelete={handleDelete}
+                onEventDrop={handleDrag}
                 week = {{
                     startHour: 9,
                     endHour: 24,
