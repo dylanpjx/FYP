@@ -1,22 +1,42 @@
-import { React, useState, useContext } from 'react';
+import { React, useEffect, useState, useContext, useRef } from 'react';
 import { parseISO } from 'date-fns';
 import axios from 'axios';
-import { Scheduler } from '@aldabil/react-scheduler';
+import { Scheduler, useScheduler } from '@aldabil/react-scheduler';
 import { useNavigate } from "react-router-dom";
-import Button from '@mui/material/Button';
+import {
+    Box,
+    Button,
+    DialogActions,
+    TextField,
+    ToggleButton,
+    ToggleButtonGroup,
+} from '@mui/material';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 import { AuthContext } from './AuthProvider';
 import DialogPopup from './DialogPopup';
 
-const GROUP_COLORS = ["#FF5733", "#17A2B8", "#FFC107", "#28A745", "#6C757D", "#6F42C1", "#20C997", "#E83E8C", "#007BFF", "#DC3545", "#FD7E14", "#6610F2", "#155724", "#D62020", "#1E90FF", "#FFC300"]
+const GROUP_COLORS = ["#FF5733", "#17A2B8", "#FFC107", "#28A745", "#6C757D", 
+"#6F42C1", "#20C997", "#E83E8C", "#007BFF", "#DC3545", "#FD7E14", "#6610F2", 
+"#155724", "#D62020", "#1E90FF", "#FFC300"]
 
 const BACKEND_URL = 'http://localhost:5000'
 
 const Calendar = () => {
+    const { setEvents } = useScheduler();
+    const [viewMode, setViewMode] = useState("EE2026");
+    const stateRef = useRef();
+    stateRef.current = viewMode;
+
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
     const [dialogTitle, setDialogTitle] = useState("");
+
+    const handleChange = (event, newModule) => {
+        if (newModule !== null) {
+            setViewMode(newModule);
+        }
+    }
 
     let navigate = useNavigate();
     const { user } = useContext(AuthContext);
@@ -26,25 +46,30 @@ const Calendar = () => {
         setDialogMessage("");
         setDialogOpen(false);
     }
+    
+    useEffect(() => {
+        const fetchRemote = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_URL}/calendar/${viewMode}`);
+                const events = res.data;
 
-    const fetchRemote = async () => {
-        try {
-            const res = await axios.get(`${BACKEND_URL}/calendar`);
-            const events = res.data;
+                const parsedEvents = events.map(event => {
+                    return {
+                        ...event,
+                        start: parseISO(event.start),
+                        end: parseISO(event.end)
+                    }
+                })
 
-            const parsedEvents = events.map(event => {
-                return {
-                    ...event,
-                    start: parseISO(event.start),
-                    end: parseISO(event.end)
-                }
-            })
-
-            return parsedEvents;
-        } catch (err) {
-            console.log('Error:', err);
+                setEvents(parsedEvents);
+            } catch (err) {
+                console.log('Error:', err);
+            }
         }
-    }
+        
+        fetchRemote();
+    }, [viewMode]);
+
 
     const handleConfirm = async (event, action) => {
         try {
@@ -54,6 +79,7 @@ const Calendar = () => {
 
             const userGroup = user.group;
             const userRole = user.role;
+            const module = stateRef.current;
 
             if (action === "edit") {
                 url = `${BACKEND_URL}/calendar/${event.event_id}`;
@@ -62,7 +88,8 @@ const Calendar = () => {
                 event = {
                     ...event,
                     group_id: userGroup,
-                    role: userRole
+                    role: userRole,
+                    module: module
                 };
             } else if (action === "create") {
                 url = `${BACKEND_URL}/calendar`;
@@ -72,7 +99,8 @@ const Calendar = () => {
                 event = {
                     ...event,
                     group_id: userGroup,
-                    color: event_color
+                    color: event_color,
+                    module: module
                 };
             } else {
                 return;
@@ -110,7 +138,6 @@ const Calendar = () => {
         }
     }
 
-    // TODO: Fix conflict resolution
     const handleDrag = async (droppedOn, updatedEvent, originalEvent) => {
         console.log(updatedEvent);
         try {
@@ -144,8 +171,34 @@ const Calendar = () => {
             Back
             </Button>
 
+            <Box
+                sx={{
+                    marginTop: 2,
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
+            >
+
+                <ToggleButtonGroup 
+                    color="primary"
+                    variant="contained" 
+                    value={viewMode}
+                    exclusive
+                    onChange={handleChange}
+                >
+                    <ToggleButton value="EE2026" >
+                        EE2026
+                    </ToggleButton>
+                    <ToggleButton value="EE2028" >
+                        EE2028
+                    </ToggleButton>
+                    <ToggleButton value="EE4218" >
+                        EE4218
+                    </ToggleButton>
+                </ToggleButtonGroup>
+            </Box>
+            <p>{viewMode}</p>
             <Scheduler
-                getRemoteEvents={fetchRemote}
                 onConfirm={handleConfirm}
                 onDelete={handleDelete}
                 onEventDrop={handleDrag}
@@ -161,8 +214,11 @@ const Calendar = () => {
                     {
                         name: "title",
                         type: "input",
-                        default: "Group " + user.group,
-                        config: { disabled: true }
+                        default: `Group ${user.group}`,
+                        config: { 
+                            disabled: true,
+                            variant: "filled"
+                        }
                     }
                     ]}
             />

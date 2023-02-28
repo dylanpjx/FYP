@@ -43,7 +43,7 @@ router.get('/', (req, res) => {
 });
 
 const calendar = require('./calendar');
-router.get('/calendar', calendar.getEvents);
+router.get('/calendar/:module', calendar.getEvents);
 router.delete('/calendar/:id', calendar.deleteEvent);
 router.put('/calendar/:id', calendar.modifyEvent);
 router.post('/calendar', calendar.createEvent);

@@ -29,7 +29,11 @@ Event.init({
     color: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    module: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
 }, {
     sequelize,
     modelName: 'Event',

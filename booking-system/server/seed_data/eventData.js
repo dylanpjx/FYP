@@ -5,7 +5,8 @@ const eventData = [
     start: new Date(new Date(new Date().setHours(9)).setMinutes(0)),
     end: new Date(new Date(new Date().setHours(10)).setMinutes(0)),
     group_id: 1,
-    color: "#FF5733"
+    color: "#FF5733",
+    module: "EE4218"
   },
   {
     event_id: 2,
@@ -13,7 +14,8 @@ const eventData = [
     start: new Date(new Date(new Date().setHours(10)).setMinutes(0)),
     end: new Date(new Date(new Date().setHours(12)).setMinutes(0)),
     group_id: 1,
-    color: "#FF5733"
+    color: "#FF5733",
+    module: "EE4218"
   },
   {
     event_id: 3,
@@ -21,7 +23,8 @@ const eventData = [
     start: new Date(new Date(new Date().setHours(15)).setMinutes(0)),
     end: new Date(new Date(new Date().setHours(17)).setMinutes(0)),
     group_id: 2,
-    color: "#17A2B8"
+    color: "#17A2B8",
+    module: "EE2026"
   },
   {
     event_id: 4,
@@ -38,6 +41,7 @@ const eventData = [
     ),
     group_id: 2,
     color: "#17A2B8",
+    module: "EE4218"
   },
   {
     event_id: 5,
@@ -53,7 +57,8 @@ const eventData = [
       )
     ),
     group_id: 3,
-    color: "#FFC107"
+    color: "#FFC107",
+    module: "EE2028"
   },
   {
     event_id: 6,
@@ -67,7 +72,8 @@ const eventData = [
         new Date().getDate() + 4
     ),
     group_id: 3,
-    color: "#FFC107"
+    color: "#FFC107",
+    module: "EE4218"
   }
 ];
 

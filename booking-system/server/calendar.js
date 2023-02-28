@@ -9,6 +9,7 @@ const exceedLimit = async (event) => {
         where: {
             [Op.and]: [
                 { group_id: event.group_id },
+                { module: event.module },
                 { event_id: { [Op.ne] : event.event_id } }
             ]
         }
@@ -28,6 +29,7 @@ const overlapBooking = async (event) => {
         where: {
             [Op.and]: [
                 { event_id: { [Op.ne]: event.event_id } },
+                { module: event.module },
                 {
                     [Op.or]: [
                         { start: { [Op.between]: [event.start, event.end] } },
@@ -52,9 +54,12 @@ const noPermissions = async (event, eventInDb) => {
 // GET
 const getEvents = async (req, res) => {
     try {
-        const events = await Event.findAll();
+        const { module } = req.params;
+        const events = await Event.findAll({
+            where: { module: module },
+        });
+        
         return res.json(events);
-
     } catch (err) {
         console.error(err);
         res.status(500).send('Error retrieving calendar data');
