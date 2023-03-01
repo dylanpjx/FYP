@@ -45,10 +45,10 @@ const overlapBooking = async (event) => {
     return overlappingEvents.length;
 }
 
-const noPermissions = async (event, eventInDb) => {
-    if (event.role === "admin")
+const noPermissions = async (req, eventInDb) => {
+    if (req.role === "admin")
         return false;
-    return event.group_id !== eventInDb.group_id;
+    return req.group_id !== eventInDb.group_id;
 }
 
 // GET
@@ -68,15 +68,22 @@ const getEvents = async (req, res) => {
 
 // DELETE
 const deleteEvent = async (req, res) => {
+    const event = req.body;
     const { id } = req.params;
 
+    console.log(event);
     try {
-        const event = await Event.findByPk(id);
-        if (!event) {
+        const existingEvent = await Event.findByPk(id);
+        if (!existingEvent) {
             return res.status(404).send('Event not found');
         }
 
-        await event.destroy();
+        // Check if user has relevant permissions
+        if (await noPermissions(event, existingEvent)) {
+            return res.status(400).send('User does not belong to the group or is not admin');
+        }
+
+        await existingEvent.destroy();
 
         res.send(id);
     } catch (err) {
@@ -132,7 +139,7 @@ const modifyEvent = async (req, res) => {
     
         // Check if user has relevant permissions
         if (await noPermissions(event, existingEvent)) {
-            return res.status(404).send('User does not belong to the group or is not admin');
+            return res.status(400).send('User does not belong to the group or is not admin');
         }
         
         // Check if group has already booked n hours of events

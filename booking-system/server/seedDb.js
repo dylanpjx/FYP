@@ -2,7 +2,6 @@ const User = require('./models/User');
 const Event = require('./models/Event');
 
 const userData = require('./seed_data/userData');
-console.log(userData);
 const eventData = require('./seed_data/eventData');
 
 const bcrypt = require('bcryptjs')

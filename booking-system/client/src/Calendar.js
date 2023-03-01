@@ -131,15 +131,25 @@ const Calendar = () => {
 
     const handleDelete = async (deletedId) => {
         try {
-            const res = await axios.delete(`${BACKEND_URL}/calendar/${deletedId}`);
+            const userGroup = user.group;
+            const userRole = user.role;
+            const res = await axios.delete(`${BACKEND_URL}/calendar/${deletedId}`, 
+                {
+                    data: {
+                        group_id: userGroup,
+                        role: userRole
+                    }
+                });
             return res.data;
         } catch (err) {
             console.error("Error:", err)
+            setDialogTitle("Unable to delete event");
+            setDialogMessage(err.response.data);
+            setDialogOpen(true);
         }
     }
 
     const handleDrag = async (droppedOn, updatedEvent, originalEvent) => {
-        console.log(updatedEvent);
         try {
             const userGroup = user.group;
             const userRole = user.role;
