@@ -1,16 +1,79 @@
 import Switches from './Switches';
-import Button from '@mui/material/Button';
+import {
+    Button,
+    DialogActions,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText
+} from '@mui/material';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Buttons from './Buttons';
 import Leds from './Leds';
 import SevenSeg from './SevenSeg';
 import { useNavigate } from "react-router-dom";
 import FileUpload from './FileUpload';
-import {useState} from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { AuthContext } from '../AuthProvider';
+import axios from 'axios';
+
+const BACKEND_URL = 'http://localhost:5000';
+const MODULE = 'EE2026'
 
 const Artix7 = () => {
     
     let navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+
+    const [isAllowed, setIsAllowed] = useState(false);
+    const [remainingTime, setRemainingTime] = useState(0);
+
+    useEffect(() => {
+        const checkUserAccess = async () => {
+          try {
+            const res = await axios.get(`${BACKEND_URL}/calendar/${MODULE}/${user.group}`);
+            const events = res.data;
+
+            const currentDate = new Date();
+    
+            for (const event of events) {
+                const startDate = new Date(event.start);
+                const endDate = new Date(event.end);
+                setIsAllowed(false);
+                if (currentDate >= startDate && currentDate <= endDate) {
+                    setIsAllowed(true);
+                    const diffInMs = endDate - currentDate;
+                    const diffInSec = Math.round(diffInMs / 1000);
+                    setRemainingTime(diffInSec);
+                    return null;
+                }
+            }
+            
+          } catch (error) {
+            console.error(error);
+          }
+        };
+    
+        checkUserAccess();
+        // Check every second
+        const intervalId = setInterval(checkUserAccess, 1000);
+    
+        return () => clearInterval(intervalId);
+    }, [user, navigate]);
+    
+
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    const [open, setOpen] = useState(true);
+
+    const handleClose = () => {
+        setOpen(false);
+        navigate("/home");
+    };
 
     const switchArr = [];
     for (let i = 0; i <= 15; ++i) {
@@ -65,6 +128,36 @@ const Artix7 = () => {
         setLedState(ledItems);
     }
 
+    if (!isAllowed) {
+        return (
+            <div>
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Something went wrong"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    Book a session to use
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        variant="contained"
+                        onClick={() => navigate("/home")}
+                    >
+                    Back to Homepage
+                    </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+        );
+    }
+
     return (
     <main className='Artix7'>
         <Button
@@ -77,6 +170,7 @@ const Artix7 = () => {
         <h3
         style={{textAlign: "center"}}
         >Artix7</h3>
+        <p>Remaining time: {formatTime(remainingTime)}</p>
         <Switches switchState={switchState} handleSwitchToggle={handleSwitchToggle}/>
         <Buttons/>
         <Leds ledState={ledState}/>

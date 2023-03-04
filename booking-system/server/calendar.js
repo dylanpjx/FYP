@@ -54,11 +54,23 @@ const noPermissions = async (req, eventInDb) => {
 // GET
 const getEvents = async (req, res) => {
     try {
-        const { module } = req.params;
-        const events = await Event.findAll({
-            where: { module: module },
-        });
-        
+        const { module, group_id } = req.params;
+        let events;
+        if(group_id){
+            events = await Event.findAll({
+                where: {
+                    [Op.and]: [
+                        {module: module},
+                        {group_id:group_id}
+                    ]
+                }
+            });
+        } else {
+            events = await Event.findAll({
+                where: { module: module },
+            });
+        }
+
         return res.json(events);
     } catch (err) {
         console.error(err);
