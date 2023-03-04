@@ -51,6 +51,14 @@ const noPermissions = async (req, eventInDb) => {
     return req.group_id !== eventInDb.group_id;
 }
 
+const editEventInOneHour = async (event) => {
+    const eventDate = new Date(event.start);
+    const today = new Date();
+    const timeDiff = today.getTime() - eventDate.getTime();
+    const hoursDiff = timeDiff / (1000 * 60 * 60);
+    return (hoursDiff <= 1);
+}
+
 // GET
 const getEvents = async (req, res) => {
     try {
@@ -107,6 +115,11 @@ const createEvent = async (req, res) => {
         if (await overlapBooking(event)) {
             return res.status(400).send('Cannot create a booking that conflicts with another group');
         }
+        
+        // Check if event is 1h away from current time
+        if (await editEventInOneHour(event)) {
+            return res.status(400).send('Cannot create booking 1h away from current time');
+        }
 
         // Else, create event by appending event id
         const maxId = await Event.max('event_id') + 1;
@@ -150,6 +163,11 @@ const modifyEvent = async (req, res) => {
         // Check if any other group has already booked that timeslot
         if (await overlapBooking(event)) {
             return res.status(400).send('Cannot create a booking that conflicts with another group');
+        }
+
+        // Check if event is 1h away from current time
+        if (await editEventInOneHour(event)) {
+            return res.status(400).send('Cannot create booking 1h away from current time');
         }
         
         await existingEvent.update(event);
