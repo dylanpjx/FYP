@@ -27,40 +27,62 @@ const Artix7 = () => {
 
     const [isAllowed, setIsAllowed] = useState(false);
     const [remainingTime, setRemainingTime] = useState(0);
-
+    
     useEffect(() => {
-        const checkUserAccess = async () => {
-          try {
-            const res = await axios.get(`${BACKEND_URL}/calendar/${MODULE}/${user.group}`);
-            const events = res.data;
 
-            const currentDate = new Date();
-    
-            for (const event of events) {
-                const startDate = new Date(event.start);
-                const endDate = new Date(event.end);
-                setIsAllowed(false);
-                if (currentDate >= startDate && currentDate <= endDate) {
-                    setIsAllowed(true);
-                    const diffInMs = endDate - currentDate;
-                    const diffInSec = Math.round(diffInMs / 1000);
-                    setRemainingTime(diffInSec);
-                    return null;
-                }
-            }
-            
-          } catch (error) {
-            console.error(error);
+      let intervalId;
+      let events;
+      let startDate;
+      let endDate;
+
+      const computeTimeRemaining = () => {
+        if(!isAllowed) {
+          return null;
+        }
+        const currentDate = new Date();
+        const diffInMs = endDate - currentDate;
+        const diffInSec = Math.round(diffInMs / 1000);
+        setRemainingTime(diffInSec);
+        if (remainingTime <= 0) {
+          clearInterval(intervalId);
+          if(checkUserAccess()){
+            intervalId = setInterval(computeTimeRemaining, 1000);
           }
-        };
-    
-        checkUserAccess();
-        // Check every second
-        const intervalId = setInterval(checkUserAccess, 1000);
-    
-        return () => clearInterval(intervalId);
-    }, [user, navigate]);
-    
+        }
+      }
+
+      const checkUserAccess = async () => {
+        try {
+          const res = await axios.get(`${BACKEND_URL}/calendar/${MODULE}/${user.group}`);
+          events = res.data;
+          
+          const currentDate = new Date();
+
+          for (const event of events) {
+            startDate = new Date(event.start);
+            endDate = new Date(event.end);
+  
+            if (currentDate >= startDate && currentDate <= endDate) {
+              setIsAllowed(true);
+              return true;
+            } else {
+              setIsAllowed(false);
+              return false;
+            }
+          }
+
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      
+      // Call the functions on mounting
+      checkUserAccess();
+      computeTimeRemaining();
+
+      return () => clearInterval(intervalId);
+    }, [remainingTime]);
+  
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
