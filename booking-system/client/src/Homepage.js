@@ -10,7 +10,6 @@ import {
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import { useNavigate, Link } from "react-router-dom";
 
 import { AuthContext } from './AuthProvider';
@@ -114,6 +113,19 @@ const Homepage = (props) => {
                                 </Button>
                             </Link>
                         </Grid>
+
+                        <Grid item>
+                            <p>Add your SSH public key here. This is used for authentication purposes for the app. Please do so before accessing the sites below</p>
+                        </Grid>
+                            <Link to="/ssh">
+                                <Button
+                                    color='primary'
+                                    variant='contained'
+                                    fullWidth
+                                >
+                                    Add SSH key
+                                </Button>
+                            </Link>
 
                         <Grid item>
                             <p>Access the relevant FPGA/MCU based on the module you are enrolled in:</p>
