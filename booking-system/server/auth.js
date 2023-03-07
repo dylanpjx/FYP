@@ -94,10 +94,12 @@ const handleLogin = async (req, res) => {
         }
 
         const token = jwt.sign({
+            id: user.id,
             name: user.name,
             group: user.group,
             role: user.role,
-            modules: user.modules
+            modules: user.modules,
+            sshkey: user.sshkey
         }, 'secretkey', {expiresIn: '3h'});
 
         res.send({ token });
@@ -107,5 +109,10 @@ const handleLogin = async (req, res) => {
     }
 };
 
+const updateSSH = async (req, res) = {
+
+}
+
 exports.handleLogin = handleLogin;
 exports.handleRegister = handleRegister;
+exports.updateSSH = updateSSH;

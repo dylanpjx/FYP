@@ -5,6 +5,7 @@ import { AuthContext } from './AuthProvider';
 import Login from './Login';
 import Register from './Register';
 import Homepage from './Homepage';
+import Ssh from './Ssh';
 import Calendar from './Calendar';
 import NotFound from './NotFound';
 
@@ -35,6 +36,11 @@ const MyRoutes = () => {
                 <Route path="home" element={
                     <RequireAuth>
                         <Homepage />
+                    </RequireAuth>
+                } />
+                <Route path="ssh" element={
+                    <RequireAuth>
+                        <Ssh />
                     </RequireAuth>
                 } />
                 <Route path="calendar" element={

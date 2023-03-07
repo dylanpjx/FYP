@@ -115,8 +115,7 @@ const Homepage = (props) => {
                         </Grid>
 
                         <Grid item>
-                            <p>Add your SSH public key here. This is used for authentication purposes for the app. Please do so before accessing the sites below</p>
-                        </Grid>
+                            <p>Add your SSH public key here. This is used for authentication purposes for the app. Please do so before accessing the other sites below</p>
                             <Link to="/ssh">
                                 <Button
                                     color='primary'
@@ -126,6 +125,7 @@ const Homepage = (props) => {
                                     Add SSH key
                                 </Button>
                             </Link>
+                        </Grid>
 
                         <Grid item>
                             <p>Access the relevant FPGA/MCU based on the module you are enrolled in:</p>
