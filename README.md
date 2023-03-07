@@ -31,4 +31,3 @@ docker inspect [CONTAINER ID]
 
 TODO:
 
-- FPGA/MCU pages require a check if there's a valid booking on access
