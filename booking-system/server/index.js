@@ -51,6 +51,7 @@ router.post('/calendar', calendar.createEvent);
 const auth = require('./auth');
 router.post('/user', auth.handleRegister);
 router.post('/login', auth.handleLogin);
+router.put('/ssh/:id', auth.updateSSH);
 
 const stm32Router = require('./stm32Router')
 const jwt = require('jsonwebtoken');

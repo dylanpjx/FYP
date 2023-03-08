@@ -7,6 +7,8 @@ const parse = require('csv-parse').parse;
 
 const jwt = require('jsonwebtoken');
 
+const sshpk = require('sshpk');
+
 const User = require('./models/User');
 const userCsvDir = './student_data/'
 
@@ -61,7 +63,6 @@ const handleRegister = async (req, res) => {
         
         // Hash password and create new user
         const hashedPassword = await bcrypt.hash(password, 10);
-        console.log(userData)
 
         const newUser = await User.create({
             name: userData.name,
@@ -109,8 +110,20 @@ const handleLogin = async (req, res) => {
     }
 };
 
-const updateSSH = async (req, res) = {
+const updateSSH = async (req, res) => {
+    const publicKey = req.body.sshkey;
+    const { id } = req.params;
 
+    try {
+        const parsedKey = sshpk.parseKey(publicKey);
+        const user = await User.findOne({ where: { id }});
+        user.sshkey = publicKey;
+        await user.save();
+
+        return res.status(200).send('Success: SSH key updated!');
+    } catch (err) {
+        return res.status(400).send('Invalid SSH public key');
+    }
 }
 
 exports.handleLogin = handleLogin;

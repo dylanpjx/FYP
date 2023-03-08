@@ -1,6 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import {
+    Alert,
+    Box,
     Button,
     Grid,
     Paper,
@@ -8,8 +10,9 @@ import {
     ToggleButton,
     ToggleButtonGroup,
 } from '@mui/material';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from './AuthProvider';
 import './Ssh.css';
@@ -17,43 +20,44 @@ import './Ssh.css';
 const BACKEND_URL = 'http://localhost:5000';
 
 const Ssh = () => {
+    let navigate = useNavigate();
     const { user } = useContext(AuthContext);
+    
+    const [sshKey, setHasSshKey] = useState(false);
 
-    const [sshkey, setSshKey] = useState(user.sshkey || "");
+    const [form, setForm] = useState("");
     const [OS, setOS] = useState('Win');
+    const [alertSuccess, setAlertSuccess] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("");
+    const [alert, setAlert] = useState(false);
+    
+    
+    useEffect(() => {
+        if (user.sshkey) {
+            setHasSshKey(true);
+        } else {
+            setHasSshKey(false);
+        }
+    }, [user.sshkey]);
 
-    const handleSubmit = async (e, user, sshkey) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(user.id);
 
         try {
             const res = await axios.put(`${BACKEND_URL}/ssh/${user.id}`, {
-                sshkey: sshkey
+                sshkey: form
             });
 
+            setForm("");
+            setAlert(true);
+            setAlertMessage(res.data);
+            setAlertSuccess(true);
         } catch (err) {
             console.error(err.response.data);
-        }
-    }
-
-    const display_key_status = (user) => {
-        console.log(user);
-        const sshkey = user.sshkey;
-
-        if (sshkey) {
-            return (
-                <Grid item xs={8}
-                    sx={{margin: "10px", minWidth: "800px"}}>
-                    <VpnKeyIcon />
-                    <p>{sshkey}</p>
-                </Grid>
-            );
-        } else {
-            return (
-                <Grid item xs={8}
-                    sx={{margin: "20px", minWidth: "800px"}}>
-                    <center>You have not added any keys yet, add one below.</center>
-                </Grid>
-            );
+            setAlert(true);
+            setAlertMessage(err.response.data);
+            setAlertSuccess(false);
         }
     }
 
@@ -109,6 +113,14 @@ const Ssh = () => {
 
     return (
         <div>
+            <Button
+                variant="contained"
+                onClick={() => navigate("/home")}
+                startIcon={ <ArrowLeftIcon /> }
+            >
+            Back
+            </Button>
+
             <Grid container
                 spacing={2}
                 sx={{
@@ -118,12 +130,10 @@ const Ssh = () => {
                     marginBottom: "30px",
                 }}
             >
-                {display_key_status(user)}
-
                 <Grid item xs={8}
                     sx={{minWidth: "800px", marginBottom: "20px"}}
                 >
-                    <form>
+                    <Box component="form" onSubmit={handleSubmit}>
                         <h1>Key</h1>
                         <TextField
                             id="ssh-key"
@@ -131,14 +141,17 @@ const Ssh = () => {
                             fullWidth
                             multiline
                             minRows={4}
-                            onChange={(e) => setSshKey(e.target.value)}
+                            onChange={(e) => setForm(e.target.value)}
                             placeholder="Begins with 'ssh-rsa', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'sk-ecdsa-sha2-nistp256@openssh.com', or 'sk-ssh-ed25519@openssh.com'"
                             sx={{ marginBottom: "5px" }}
                         />
-                        <Button type="submit" variant="contained" color="primary" onSubmit={handleSubmit}>
+                        <Button type="submit" variant="contained" color="primary">
                             Update SSH key
                         </Button>
-                    </form>
+                    </Box>
+                    {alert ? <Alert 
+                                onClose={() => {setAlert(false);}}
+                                severity={alertSuccess ? "success" : "error"}>{alertMessage}</Alert> : <></> }
                 </Grid>
 
                 <Grid item xs={8} 
