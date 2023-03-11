@@ -207,7 +207,6 @@ const Calendar = () => {
                     </ToggleButton>
                 </ToggleButtonGroup>
             </Box>
-            <p>{viewMode}</p>
             <Scheduler
                 onConfirm={handleConfirm}
                 onDelete={handleDelete}
