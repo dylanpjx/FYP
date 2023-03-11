@@ -8,6 +8,7 @@ import Homepage from './Homepage';
 import Ssh from './Ssh';
 import Calendar from './Calendar';
 import NotFound from './NotFound';
+import TicketForm from './TicketForm';
 
 import Artix7 from './interface/Artix7';
 import Zedboard from './interface/ZedBoard';
@@ -61,6 +62,11 @@ const MyRoutes = () => {
                 <Route path="stm32" element={
                     <RequireAuth>
                         <Stm32 />
+                    </RequireAuth>
+                } />
+                <Route path="ticketform" element={
+                    <RequireAuth>
+                        <TicketForm />
                     </RequireAuth>
                 } />
                 <Route path="*" element={<NotFound />} />
