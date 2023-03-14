@@ -65,9 +65,7 @@ const MyRoutes = () => {
                     </RequireAuth>
                 } />
                 <Route path="ticketform" element={
-                    <RequireAuth>
                         <TicketForm />
-                    </RequireAuth>
                 } />
                 <Route path="*" element={<NotFound />} />
             </Routes>
