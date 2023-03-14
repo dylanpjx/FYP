@@ -99,6 +99,9 @@ const Login = () => {
                         <Link href="/register" variant="body2">
                             {"Don't have an account? Sign Up"}
                         </Link>
+                        <Link href="/ticketform" variant="body2">
+                            {"Need help? Contact us"}
+                        </Link>
                       </Grid>
                     </Grid>
 
