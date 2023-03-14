@@ -30,17 +30,11 @@ const TicketForm = () => {
                 name, email, description
             });
             console.log(res.data);
-            setSeverity('success');
-            setMessage(res.data);
-            setOpen(true);
+            
         } catch (err) {
             console.error(err.response.data);
-            setSeverity('error');
-            setMessage(err.response.data);
-            setOpen(true);
-        ;
+        }
     }
-
     return (
         <div>
             <ThemeProvider theme={theme}>
@@ -106,6 +100,5 @@ const TicketForm = () => {
             </ThemeProvider>
         </div>
     )
-}
 };
 export default TicketForm;
