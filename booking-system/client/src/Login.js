@@ -99,7 +99,12 @@ const Login = () => {
                         <Link href="/register" variant="body2">
                             {"Don't have an account? Sign Up"}
                         </Link>
-                        <br><Link href="/ticketform" variant="body2">
+                      </Grid>
+                    </Grid>
+
+                    <Grid container justifyContent="flex-end">
+                      <Grid item>
+                        <Link href="/ticketform" variant="body2">
                             {"Need help? Contact us"}
                         </Link>
                       </Grid>
