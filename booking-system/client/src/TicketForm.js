@@ -30,7 +30,7 @@ const TicketForm = () => {
                 name, email, description
             });
             console.log(res.data);
-            return navigate('/ticketsucess');
+            return navigate('/ticketsuccess');
             
         } catch (err) {
             console.error(err.response.data);
