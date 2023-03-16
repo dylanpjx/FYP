@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { 
     Box,
     Button,
@@ -9,6 +10,8 @@ import {
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+
+const BACKEND_URL = 'http://localhost:5000';
 
 const TicketForm = () => {
     let navigate = useNavigate();
@@ -22,20 +25,17 @@ const TicketForm = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         
-        // Send ticket data to backend API
-        const ticketData = { name, email, description };
-        // Assuming the API returns a success boolean
-        const success = await sendTicketDataToBackend(ticketData);
-
-        if (success) {
-            // Navigate to the success page if submission was successful
-            return navigate('/ticket/success');
-        } else {
-            // Display error message to user if submission failed
-            alert('An error occurred. Please try again later.');
+        try {
+            const res = await axios.post(`${BACKEND_URL}/ticket`, {
+                name, email, description
+            });
+            console.log(res.data);
+            return navigate('/ticketsuccess');
+            
+        } catch (err) {
+            console.error(err.response.data);
         }
     }
-
     return (
         <div>
             <ThemeProvider theme={theme}>
@@ -101,6 +101,5 @@ const TicketForm = () => {
             </ThemeProvider>
         </div>
     )
-}
-
+};
 export default TicketForm;

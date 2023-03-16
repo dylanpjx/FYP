@@ -102,6 +102,14 @@ const Login = () => {
                       </Grid>
                     </Grid>
 
+                    <Grid container justifyContent="flex-end">
+                      <Grid item>
+                        <Link href="/ticketform" variant="body2">
+                            {"Need help? Contact us"}
+                        </Link>
+                      </Grid>
+                    </Grid>
+
                   </Box>
                 </Box>
               </Container>

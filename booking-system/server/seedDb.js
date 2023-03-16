@@ -1,8 +1,10 @@
 const User = require('./models/User');
 const Event = require('./models/Event');
+const Ticket = require('./models/Ticket');
 
 const userData = require('./seed_data/userData');
 const eventData = require('./seed_data/eventData');
+const ticketData = require('./seed_data/ticketData');
 
 const bcrypt = require('bcryptjs')
 const saltRounds = 10;
@@ -17,6 +19,7 @@ hashPassword = async (password) => {
     // DB init here
     await User.sync({ force: true }); // For testing only, s/force/alter when done
     await Event.sync({ force: true }); // For testing only, s/force/alter when done
+    await Ticket.sync({ force: true }); // For testing only, s/force/alter when done
     console.log("Tables initialized");
     
     // Hash passwords
@@ -28,6 +31,7 @@ hashPassword = async (password) => {
     // Seed data here
     await User.bulkCreate(userData);
     await Event.bulkCreate(eventData);
+    await Ticket.bulkCreate(ticketData);
     console.log('Data seeded successfully');
     process.exit();
 })();
