@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { 
     Box,
-    Button,
     Container,
     CssBaseline,
-    TextField,
     Typography,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const TicketSuccess = () => {
+    const theme = createTheme();
+    
     return (
         <div>
             <ThemeProvider theme={theme}>
