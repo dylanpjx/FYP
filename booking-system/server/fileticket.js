@@ -17,4 +17,4 @@ const handleTicket = async (req, res) => {
     }
 };
 
-exports.handleLogin = handleTicket;
+exports.handleTicket = handleTicket;
