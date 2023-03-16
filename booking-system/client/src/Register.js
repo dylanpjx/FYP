@@ -191,11 +191,17 @@ const Register = () => {
                         <Link href="/" variant="body2">
                           Already have an account? Sign in
                         </Link>
-                        <br><Link href="/ticketform" variant="body2">
+                      </Grid>
+                    </Grid>
+
+                    <Grid container justifyContent="flex-end">
+                      <Grid item>
+                        <Link href="/ticketform" variant="body2">
                           Need help? Contact us
                         </Link>
                       </Grid>
                     </Grid>
+                          
                   </Box>
                 </Box>
               </Container>
