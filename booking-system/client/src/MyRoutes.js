@@ -9,6 +9,7 @@ import Ssh from './Ssh';
 import Calendar from './Calendar';
 import NotFound from './NotFound';
 import TicketForm from './TicketForm';
+import TicketSuccess from './TicketSuccess'
 
 import Artix7 from './interface/Artix7';
 import Zedboard from './interface/ZedBoard';
@@ -65,7 +66,10 @@ const MyRoutes = () => {
                     </RequireAuth>
                 } />
                 <Route path="ticketform" element={
-                        <TicketForm />
+                    <TicketForm />
+                } />
+                <Route path="ticketsuccess" element={
+                    <TicketSuccess />
                 } />
                 <Route path="*" element={<NotFound />} />
             </Routes>
