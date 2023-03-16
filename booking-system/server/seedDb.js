@@ -19,7 +19,7 @@ hashPassword = async (password) => {
     // DB init here
     await User.sync({ force: true }); // For testing only, s/force/alter when done
     await Event.sync({ force: true }); // For testing only, s/force/alter when done
-    await.Ticket.sync({ force: true }); // For testing only, s/force/alter when done
+    await Ticket.sync({ force: true }); // For testing only, s/force/alter when done
     console.log("Tables initialized");
     
     // Hash passwords
