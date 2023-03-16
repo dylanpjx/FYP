@@ -140,7 +140,7 @@ const Homepage = (props) => {
                         </Grid>
 
                         <Grid item>
-                            <br><Link href="/ticketform" variant="body2">
+                            <Link href="/ticketform" variant="body2">
                                 Need help? Contact us
                             </Link>
                         </Grid>
