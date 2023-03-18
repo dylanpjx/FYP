@@ -89,8 +89,8 @@ const TicketForm = () => {
                         label="Ticket Type"
                         onChange={(e) => setTicketType(e.target.value)}
                       >
-                        <MenuItem value={'bug'}>Bug</MenuItem>
-                        <MenuItem value={'question'}>Question</MenuItem>
+                        <MenuItem value={'Bug'}>Bug</MenuItem>
+                        <MenuItem value={'Question'}>Question</MenuItem>
                       </Select>
                     </FormControl>
                     <TextField
