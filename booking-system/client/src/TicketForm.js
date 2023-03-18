@@ -32,7 +32,7 @@ const TicketForm = () => {
         
         try {
             const res = await axios.post(`${BACKEND_URL}/ticket`, {
-                name, email, description
+                name, email, description, ticketType
             });
             console.log(res.data);
             return navigate('/ticketsuccess');
