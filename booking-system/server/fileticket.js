@@ -1,13 +1,14 @@
 const Ticket = require('./models/Ticket');
 
 const handleTicket = async (req, res) => {
-    const { name, email, description } = req.body;
+    const { name, email, description, ticketType } = req.body;
 
     try {
         const newTicket = await Ticket.create({
             name,
             email,
             description,
+            ticketType,
         });
         return res.status(201).send(`Ticket successfully filed.`);
       
