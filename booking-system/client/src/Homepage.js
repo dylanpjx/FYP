@@ -31,21 +31,9 @@ const Homepage = (props) => {
     const gen_module_links = (modules) => {
         return modules.map((module) => {
             switch (module) {
-                case "EE4218":
-                    return (
-                        <Link to="/zedboard" key="zedboard">
-                            <Button
-                                color='primary'
-                                variant='contained'
-                                fullWidth
-                            >
-                                EE4218
-                            </Button>
-                        </Link>
-                    );
                 case "EE2026":
                     return (
-                        <Link to="/artix" key="artix">
+                        <Link to="/fpga" key="fpga">
                             <Button
                                 color='primary'
                                 variant='contained'
@@ -67,6 +55,18 @@ const Homepage = (props) => {
                             </Button>
                         </Link>
                     )
+                case "EE4218":
+                    return (
+                        <Link to="/fpga" key="fpga">
+                            <Button
+                                color='primary'
+                                variant='contained'
+                                fullWidth
+                            >
+                                EE4218
+                            </Button>
+                        </Link>
+                    );
                 default:
                     return null;
             };
@@ -128,6 +128,19 @@ const Homepage = (props) => {
                         </Grid>
 
                         <Grid item>
+                            <p>The instructions for using the remote FPGA is detailed here.</p>
+                            <Link to="/fpga">
+                                <Button
+                                    color='primary'
+                                    variant='contained'
+                                    fullWidth
+                                >
+                                    Read remote FPGA instructions
+                                </Button>
+                            </Link>
+                        </Grid>
+
+                        <Grid item>
                             <p>Access the relevant FPGA/MCU based on the module you are enrolled in:</p>
                             <ButtonGroup 
                                 orientation="vertical"
@@ -139,8 +152,6 @@ const Homepage = (props) => {
 
                         </Grid>
                     </Grid>
-
-
 
                     <Button
                         type='submit'

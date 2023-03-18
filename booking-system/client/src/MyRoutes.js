@@ -9,10 +9,9 @@ import Ssh from './Ssh';
 import Calendar from './Calendar';
 import NotFound from './NotFound';
 
-import Artix7 from './interface/Artix7';
-import Zedboard from './interface/ZedBoard';
-import Stm32 from './interface/STM32';
+import FPGA from './FPGA';
 
+import Stm32 from './interface/STM32';
 import './interface/Interface.css';
 
 const RequireAuth = ({ children }) => {
@@ -48,14 +47,9 @@ const MyRoutes = () => {
                         <Calendar />
                     </RequireAuth>
                 } />
-                <Route path="artix" element={
+                <Route path="fpga" element={
                     <RequireAuth>
-                        <Artix7 />
-                    </RequireAuth>
-                } />
-                <Route path="zedboard" element={
-                    <RequireAuth>
-                        <Zedboard />
+                        <FPGA />
                     </RequireAuth>
                 } />
                 <Route path="stm32" element={
