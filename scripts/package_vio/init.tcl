@@ -3,10 +3,10 @@
 open_project [glob "./*.xpr"]
 
 # Create VIO IP
-source ./scripts/ip/vio.tcl
+source ./include/ip/vio.tcl
 
 # Add Wrapper.v to sources
-import_files ./scripts/rtl/Wrapper.v
+import_files ./include/rtl/Wrapper.v
 
 # Set Wrapper.v as top file
 set_property top Wrapper [current_fileset]
@@ -17,7 +17,7 @@ update_compile_order -fileset sim_1
 set_property is_enabled false [get_files *.xdc]
 
 # Add clock constraints
-import_files -fileset constrs_1 ./scripts/xdc/init.xdc
+import_files -fileset constrs_1 ./include/xdc/init.xdc
 update_compile_order -fileset constrs_1
 
 # Generate bitstream
