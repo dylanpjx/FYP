@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { 
-    Box,
-    Button,
-    ButtonGroup,
-    Container,
-    CssBaseline,
-    Grid,
-    Paper,
+  Box,
+  Button,
+  ButtonGroup,
+  Container,
+  CssBaseline,
+  Grid,
+  Paper,
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -15,159 +15,158 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from './AuthProvider';
 
 const Homepage = (props) => {
-    const paperStyle = { display: "flex", flexDirection: "column", padding: 20, margin: "20px auto" };
-    const buttonGroupStyle = { display: "block", marginBottom: 80 };
+  const paperStyle = { display: "flex", flexDirection: "column", padding: 20, margin: "20px auto" };
+  const buttonGroupStyle = { display: "block", marginBottom: 80 };
 
-    let navigate = useNavigate();
-    const theme = createTheme();
-    
-    const { user, logout } = useContext(AuthContext);
+  let navigate = useNavigate();
+  const theme = createTheme();
 
-    const onLogout = () => {
-        logout();
-        return navigate('/');
-    }
+  const { user, logout } = useContext(AuthContext);
 
-    const gen_module_links = (modules) => {
-        return modules.map((module) => {
-            switch (module) {
-                case "EE2026":
-                    return (
-                        <Link to="/fpga" key="fpga">
-                            <Button
-                                color='primary'
-                                variant='contained'
-                                fullWidth
-                            >
-                                EE2026
-                            </Button>
-                        </Link>
-                    )
-                case "EE2028":
-                    return (
-                        <Link to="/stm32" key="stm32">
-                            <Button
-                                color='primary'
-                                variant='contained'
-                                fullWidth
-                            >
-                                EE2028
-                            </Button>
-                        </Link>
-                    )
-                case "EE4218":
-                    return (
-                        <Link to="/fpga" key="fpga">
-                            <Button
-                                color='primary'
-                                variant='contained'
-                                fullWidth
-                            >
-                                EE4218
-                            </Button>
-                        </Link>
-                    );
-                default:
-                    return null;
-            };
-        });
-    }
+  const onLogout = () => {
+    logout();
+    return navigate('/');
+  }
 
-    return (
-        <div>
-        <ThemeProvider theme={theme}>
+  const gen_module_links = (modules) => {
+    return modules.map((module) => {
+      switch (module) {
+        case "EE2026":
+          return (
+            <Link to="/fpga" key="fpga">
+              <Button
+                color='primary'
+                variant='contained'
+                fullWidth
+              >
+                EE2026
+              </Button>
+            </Link>
+          )
+        case "EE2028":
+          return (
+            <Link to="/stm32" key="stm32">
+              <Button
+                color='primary'
+                variant='contained'
+                fullWidth
+              >
+                EE2028
+              </Button>
+            </Link>
+          )
+        case "EE4218":
+          return (
+            <Link to="/fpga" key="fpga">
+              <Button
+                color='primary'
+                variant='contained'
+                fullWidth
+              >
+                EE4218
+              </Button>
+            </Link>
+          );
+        default:
+          return null;
+      };
+    });
+  }
+
+  return (
+    <div>
+      <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
-        <CssBaseline />
-            <Box
-              sx={{
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-                <h1>Homepage</h1>
+          <CssBaseline />
+          <Box
+          sx={{
+            marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+          }}
+          >
+          <h1>Homepage</h1>
 
-                <Paper elevation={3} style={paperStyle} >
+            <Paper elevation={3} style={paperStyle} >
 
-                    <Grid container columnSpacing={1} direction="row" alignItems="center"> 
-                        <Grid item>
-                            <PersonIcon />
-                        </Grid>
-                        <Grid item marginBottom="6px">
-                            <h3>{user.name} ({user.role})</h3>
-                        </Grid>
-                    </Grid>
+            <Grid container columnSpacing={1} direction="row" alignItems="center"> 
+              <Grid item>
+                <PersonIcon />
+              </Grid>
+              <Grid item marginBottom="6px">
+                <h3>{user.name} ({user.role})</h3>
+              </Grid>
+            </Grid>
 
-                    <Grid container rowSpacing={3} direction="column" alignItems="center"> 
-                        <Grid item>
-                            <p>Book a timeslot using the calendar:</p>
-                            <Link to="/calendar">
-                                <Button
-                                    color='primary'
-                                    variant='contained'
-                                    fullWidth
-                                >
-                                    Calendar
-                                </Button>
-                            </Link>
-                        </Grid>
+            <Grid container rowSpacing={3} direction="column" alignItems="center"> 
+              <Grid item>
+                <p>Book a timeslot using the calendar:</p>
+                <Link to="/calendar">
+                  <Button
+                    color='primary'
+                    variant='contained'
+                    fullWidth
+                  >
+                    Calendar
+                  </Button>
+                </Link>
+              </Grid>
 
-                        <Grid item>
-                            <p>Add your SSH public key here. This is used for authentication purposes for the app. Please do so before accessing the other sites below</p>
-                            <Link to="/ssh">
-                                <Button
-                                    color='primary'
-                                    variant='contained'
-                                    fullWidth
-                                >
-                                    Add SSH key
-                                </Button>
-                            </Link>
-                        </Grid>
+              <Grid item>
+                <p>Add your SSH public key here. This is used for authentication purposes for the app. Please do so before accessing the other sites below</p>
+                <Link to="/ssh">
+                  <Button
+                    color='primary'
+                    variant='contained'
+                    fullWidth
+                  >
+                    Add SSH key
+                  </Button>
+                </Link>
+              </Grid>
 
-                        <Grid item>
-                            <p>The instructions for using the remote FPGA is detailed here.</p>
-                            <Link to="/fpga">
-                                <Button
-                                    color='primary'
-                                    variant='contained'
-                                    fullWidth
-                                >
-                                    Read remote FPGA instructions
-                                </Button>
-                            </Link>
-                        </Grid>
+              <Grid item>
+                <p>The instructions for using the remote FPGA is detailed here.</p>
+                <Link to="/fpga">
+                  <Button
+                    color='primary'
+                    variant='contained'
+                    fullWidth
+                  >
+                    Read remote FPGA instructions
+                  </Button>
+                </Link>
+              </Grid>
 
-                        <Grid item>
-                            <p>Access the relevant FPGA/MCU based on the module you are enrolled in:</p>
-                            <ButtonGroup 
-                                orientation="vertical"
-                                variant="contained"
-                                style= {buttonGroupStyle}
-                            >
-                                {gen_module_links(JSON.parse(user.modules))}
-                            </ButtonGroup>
+              <Grid item>
+                <p>Access the relevant FPGA/MCU based on the module you are enrolled in:</p>
+                <ButtonGroup 
+                  orientation="vertical"
+                  variant="contained"
+                  style= {buttonGroupStyle}
+                >
+                  {gen_module_links(JSON.parse(user.modules))}
+                </ButtonGroup>
+              </Grid>
+            </Grid>
 
-                        </Grid>
-                    </Grid>
-
-                    <Button
-                        type='submit'
-                        color='secondary'
-                        variant='contained'
-                        onClick={onLogout}
-                        fullWidth
-                    >
-                        Sign out
-                    </Button>
-                </Paper>
-            </Box>
+              <Button
+                type='submit'
+                color='secondary'
+                variant='contained'
+                onClick={onLogout}
+                fullWidth
+              >
+                Sign out
+              </Button>
+            </Paper>
+          </Box>
         </Container>
-        </ThemeProvider>
-        </div>
-    );
+      </ThemeProvider>
+    </div>
+  );
 }
 
 export default Homepage;
