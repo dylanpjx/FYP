@@ -37,7 +37,9 @@ const FpgaVid = () => {
           <h2>After your booking:</h2><br/>
           Disconnect from remote FPGA by closing the hardware server on Vivado.<br/><br/>
           Disconnect from the remote UART by clicking the <b>Open</b> button such that it is "unpressed".
-
+          <br/>
+          <br/>
+          <img src={require('../images/fpga/realterm_close.png')} height={400}/>
           
         </Grid>
       </Grid>
