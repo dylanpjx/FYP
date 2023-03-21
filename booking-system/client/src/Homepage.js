@@ -33,7 +33,7 @@ const Homepage = (props) => {
       switch (module) {
         case "EE2026":
           return (
-            <Link to="/fpga" key="fpga">
+            <Link to="/fpgavid" key="fpga">
               <Button
                 color='primary'
                 variant='contained'
@@ -57,7 +57,7 @@ const Homepage = (props) => {
           )
         case "EE4218":
           return (
-            <Link to="/fpga" key="fpga">
+            <Link to="/fpgavid" key="fpga">
               <Button
                 color='primary'
                 variant='contained'
