@@ -5,7 +5,8 @@
 
 module Wrapper(
   input clk,
-  input RX, 
+  input RX,
+  output TX,
   output [15:0] led,
   output dp,
   output [7:0] anode, // anode for basys only has 4 to use
