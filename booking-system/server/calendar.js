@@ -54,9 +54,10 @@ const noPermissions = async (req, eventInDb) => {
 const editEventInOneHour = async (event) => {
     const eventDate = new Date(event.start);
     const today = new Date();
-    const timeDiff = today.getTime() - eventDate.getTime();
+    const timeDiff = eventDate.getTime() - today.getTime();
     const hoursDiff = timeDiff / (1000 * 60 * 60);
-    return (hoursDiff <= 1);
+    // return (hoursDiff <= 1);
+    return false; 
 }
 
 // GET

@@ -1,57 +1,34 @@
 const express = require('express')
-const router = express.Router()
-// const { SerialPort } = require('serialport')
+const WebSocket = require('ws')
+const wss = new WebSocket.Server({ port: 8080 })
+require('events').defaultMaxListeners = 15
 
-// const port  = new SerialPort({
-//     path: 'COM8', // change accordingly
-//     baudRate: 57600 
-// });
+// Client (e.g., Remote Lab) shall connect to ws://backend_url:8080
+wss.on('connection', (ws) => {
+    console.log(`Web Backend <-> Remote Lab Connected!`)
+    ws.on('close', () => { console.log(`Web Backend <-> Remote Lab Disconnected!`) })
+})
 
 const handleSTM32 = (req, res) => {
-    let button = req.body.button
-    let value = req.body.value
-
-    console.log(req.body)
-    switch (button){
-        case "RESET":
-            // port.write(Uint8Array.from([value]), (err) => {
-            //     if (err) return console.log('Error: ',err.message)
-            // })
-            console.log("Trigger RESET button") // output doesnt matter
-            break
-        case "USER":
-            // port.write(Uint8Array.from([value]), (err) => {
-            //     if (err) return console.log('Error: ',err.message)
-            // })
-            console.log(`Trigger ${button} to ${value}`)
-            break
-        case "SLIDER":
-            value = Math.min(255, Math.max(0,value)) // Limit range to 0-255
-            // port.write(Uint8Array.from([value]), (err) => {
-            //     if (err) return console.log('Error: ',err.message)
-            // })
-            console.log(`Action: ${value}`)
-            break
-        case "X-":
-            console.log(`Orientation: ${button} to ${value}` )
-            break
-        case "X+":
-            console.log(`Orientation: ${button} to ${value}`)
-            break
-        case "Y-":
-            console.log(`Orientation: ${button} to ${value}`)
-            break
-        case "Y+":
-            console.log(`Orientation: ${button} to ${value}`)
-            break
-        case "Z-":
-            console.log(`Orientation: ${button} to ${value}`)
-            break
-        case "Z+":
-            console.log(`Orientation: ${button} to ${value}`)
-            break
+    // button - "USER", "RESET", "ERASE", or "SENSOR"
+    // value - USER: 0 or 1, RESET: Dont Care, ERASE: Dont Care, SENSOR: [X, Y, Z]
+    let button = req.body.button 
+    let value  = req.body.value
+    console.log(button,value)
+    try {
+        // Broadcast message to connected clients 
+        wss.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN){
+                client.send(JSON.stringify({
+                    button: button,
+                    value: value
+                }))
+            }
+        })
+        res.status(200).send()
+    } catch (error) {
+        res.status(400).send(error)
     }
-    res.status(200).send("success")
 }
 
 exports.handleSTM32 = handleSTM32
