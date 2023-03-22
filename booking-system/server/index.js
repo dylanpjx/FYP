@@ -57,21 +57,7 @@ const ticket = require('./fileticket');
 router.post('/ticket', ticket.handleTicket);
 
 const stm32Router = require('./stm32Router')
-const jwt = require('jsonwebtoken');
-
-const authMiddleware = async (req, res, next) => {
-  try {
-    const token = req.header('Authorization').replace('Bearer ','')
-    jwt.verify(token, 'secretkey');
-    next();
-  } catch (err) {
-    console.error('Error verifying token:', err.message);
-    return res.status(401).send('Unauthorized');
-  }
-};
-
-// Protected route
-router.post('/stm32', authMiddleware, stm32Router.handleSTM32)
+router.post('/stm32', stm32Router.handleSTM32)
 
 app.listen(5000, () => console.log("Server started on port 5000"));
 
