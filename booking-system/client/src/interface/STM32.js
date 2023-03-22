@@ -313,10 +313,10 @@ const STM32 = () => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography variant='subtitle2'>SSH Forwarding</Typography>
+          <Typography variant='subtitle2'>SSH Local Forwarding</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>We shall use SSH Local Forwarding to establish connection between STM32CubeIDE and OpenOCD as well as RealTerm and ser2net. OpenOCD (gdb server) runs on 3155 and ser2net runs on 3156 on our remote lab worksatation. 
+          <Typography>We shall use SSH Local Forwarding to establish connection between STM32CubeIDE and OpenOCD as well as RealTerm and ser2net. OpenOCD (gdb server) runs on 3155 and ser2net runs on 3156 in our Remote Lab Worksatation. 
             <br></br>
             To begin forwarding
           </Typography>
@@ -341,7 +341,7 @@ const STM32 = () => {
                   </code>
                 </Typography>
               </Box>
-              For this command, STM32CubeIDE will connect to localhost:2000 for remote debugging and RealTerm will connect to localhost:2001 for serial interaction
+              In your computer, STM32CubeIDE will connect to localhost:2000 for remote debugging and RealTerm will connect to localhost:2001 for serial interaction
             </li>
 
             <li>Leave the terminal open and it will close once your session is up</li>
@@ -360,15 +360,15 @@ const STM32 = () => {
         <AccordionDetails>
           <Typography>Please apply these changes on STM32CubeIDE before starting remote debugging</Typography>
           <ol>
-            <li>Build Program</li>
-            <li>Right Click to the Project you are working on (e.g., demo_exti_print) &rarr; Debug As &rarr; Debug Configurations...</li>
+            <li>Right Click your project and Build Program</li>
+            <li>Right Click your Project &rarr; Debug As &rarr; Debug Configurations...</li>
             <li>Debugger Tab
               <br></br>
               Under GDB Connection Settings, select "Connect to remote GDB server" 
               <br></br>
               Hostname or IP address = localhost. Port Number = 2000
               <br></br>
-              Under "Misc" section, uncheck Enable live expresion
+              Under "Misc" section, uncheck "Enable live expresion"
             </li>
             <li>
               Click Apply and Debug
@@ -388,7 +388,7 @@ const STM32 = () => {
           <Typography>We shall establish RealTerm &harr; ser2net connection</Typography>
           <ol>
             <li>Click"Port" Tab</li>
-            <li>Set Baud to 115200 and Port as "localhost:2001"</li>
+            <li>Set Baud to 115200 and Port as "localhost:2001" since we intialized 2001 for local forwarding to ser2net</li>
             <li>Leave Parity, Data Bits, Stop Bits, Hardware Flow Control as it is</li>
             <li>Click Open</li>
           </ol>
