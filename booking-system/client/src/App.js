@@ -5,11 +5,11 @@ import MyRoutes from './MyRoutes';
 
 
 function App() {
-    return (
-        <AuthProvider>
-            <MyRoutes />
-        </AuthProvider>
-    );
+  return (
+    <AuthProvider>
+      <MyRoutes />
+    </AuthProvider>
+  );
 }
 
 export default App;

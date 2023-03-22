@@ -6,30 +6,29 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-// TODO: Add DialogActions on inherit
 const DialogPopup = (props) => {
-    return (
-        <div>
-            <Dialog
-                open={props.open}
-                onClose={props.handleClose}
-            >
-                <DialogTitle>
-                    {props.title}
-                </DialogTitle>
+  return (
+    <div>
+      <Dialog
+        open={props.open}
+        onClose={props.handleClose}
+      >
+        <DialogTitle>
+          {props.title}
+        </DialogTitle>
 
-                <DialogContent>
-                    <DialogContentText>
-                        {props.message}
-                    </DialogContentText>
-                </DialogContent>
+        <DialogContent>
+          <DialogContentText>
+            {props.message}
+          </DialogContentText>
+        </DialogContent>
 
-                <DialogActions>
-                    <Button onClick={props.handleClose}>Got it!</Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
+        <DialogActions>
+          <Button onClick={props.handleClose}>Got it!</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
 }
 
 export default DialogPopup;

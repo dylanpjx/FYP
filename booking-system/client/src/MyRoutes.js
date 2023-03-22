@@ -16,55 +16,56 @@ import Stm32 from './interface/STM32';
 import './interface/Interface.css';
 
 const RequireAuth = ({ children }) => {
-    const { userAuthenticated } = useContext(AuthContext);
-    const location = useLocation();
-    
-    if (!userAuthenticated) {
-        return <Navigate to="/" state={{ from:location }} replace />;
-    }
+  const { userAuthenticated } = useContext(AuthContext);
+  const location = useLocation();
 
-    return children;
+  if (!userAuthenticated) {
+    return <Navigate to="/" state={{ from:location }} replace />;
+  }
+
+  return children;
 }
 
 
 const MyRoutes = () => {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="home" element={
-                    <RequireAuth>
-                        <Homepage />
-                    </RequireAuth>
-                } />
-                <Route path="ssh" element={
-                    <RequireAuth>
-                        <Ssh />
-                    </RequireAuth>
-                } />
-                <Route path="calendar" element={
-                    <RequireAuth>
-                        <Calendar />
-                    </RequireAuth>
-                } />
-                <Route path="fpga" element={
-                    <RequireAuth>
-                        <FPGA />
-                    </RequireAuth>
-                } />
-                <Route path="stm32" element={
-                    <RequireAuth>
-                        <Stm32 />
-                    </RequireAuth>
-                } />
-                <Route path="ticketform" element={
-                    <TicketForm />
-                } />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-        </Router>
-    )
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="home" element={
+          <RequireAuth>
+            <Homepage />
+          </RequireAuth>
+        } />
+        <Route path="ssh" element={
+          <RequireAuth>
+            <Ssh />
+          </RequireAuth>
+        } />
+        <Route path="calendar" element={
+          <RequireAuth>
+            <Calendar />
+          </RequireAuth>
+        } />
+        <Route path="fpga" element={
+          <RequireAuth>
+            <FPGA />
+          </RequireAuth>
+        } />
+        <Route path="stm32" element={
+          <RequireAuth>
+            <Stm32 />
+          </RequireAuth>
+        } />
+        <Route path="ticketform" element={
+            <TicketForm />
+        } />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+  )
 }
 
 export default MyRoutes;
