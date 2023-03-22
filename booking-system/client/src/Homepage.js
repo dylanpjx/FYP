@@ -33,7 +33,7 @@ const Homepage = (props) => {
       switch (module) {
         case "EE2026":
           return (
-            <Link to="/fpgavid" key="fpga">
+            <Link to="/fpgavid" key="nexys">
               <Button
                 color='primary'
                 variant='contained'
@@ -57,7 +57,7 @@ const Homepage = (props) => {
           )
         case "EE4218":
           return (
-            <Link to="/fpgavid" key="fpga">
+            <Link to="/fpgavid" key="zedboard">
               <Button
                 color='primary'
                 variant='contained'
@@ -150,12 +150,6 @@ const Homepage = (props) => {
                     {gen_module_links(JSON.parse(user.modules))}
                   </ButtonGroup>
                 </Grid>
-
-                <Grid item>
-                    <Link href="/ticketform" variant="body2">
-                        Need help? Contact us
-                    </Link>
-                </Grid>
               </Grid>
 
               <Button
@@ -168,6 +162,9 @@ const Homepage = (props) => {
                 Sign out
               </Button>
             </Paper>
+            <Link to="/form">
+                Need help? Contact us
+            </Link>
           </Box>
         </Container>
       </ThemeProvider>

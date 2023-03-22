@@ -33,38 +33,38 @@ const MyRoutes = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="home" element={
+        <Route path="/form" element={
+            <TicketForm />
+        } />
+        <Route path="/home" element={
           <RequireAuth>
             <Homepage />
           </RequireAuth>
         } />
-        <Route path="ssh" element={
+        <Route path="/ssh" element={
           <RequireAuth>
             <Ssh />
           </RequireAuth>
         } />
-        <Route path="calendar" element={
+        <Route path="/calendar" element={
           <RequireAuth>
             <Calendar />
           </RequireAuth>
         } />
-        <Route path="fpga" element={
+        <Route path="/fpga" element={
           <RequireAuth>
             <FPGA />
           </RequireAuth>
         } />
-        <Route path="fpgavid" element={
+        <Route path="/fpgavid" element={
           <RequireAuth>
             <FpgaVid />
           </RequireAuth>
         } />
-        <Route path="stm32" element={
+        <Route path="/stm32" element={
           <RequireAuth>
             <Stm32 />
           </RequireAuth>
-        } />
-        <Route path="ticketform" element={
-            <TicketForm />
         } />
         <Route path="*" element={<NotFound />} />
       </Routes>

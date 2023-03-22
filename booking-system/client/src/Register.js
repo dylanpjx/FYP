@@ -188,13 +188,13 @@ const Register = () => {
 
               <Grid container>
                 <Grid item xs>
-                  <Link href="/" variant="body2">
-                    Already have an account? Sign in
+                  <Link href="/form" variant="body2">
+                    Need help? Contact us
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/ticketform" variant="body2">
-                    Need help? Contact us
+                  <Link href="/" variant="body2">
+                    Already have an account? Sign in
                   </Link>
                 </Grid>
               </Grid>

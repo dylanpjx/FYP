@@ -17,6 +17,7 @@ import {
     DialogContentText,
     DialogTitle,
 } from '@mui/material';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 
@@ -65,6 +66,13 @@ const TicketForm = () => {
     return (
         <div>
             <ThemeProvider theme={theme}>
+              <Button
+                variant="contained"
+                onClick={() => navigate("/home")}
+                startIcon={ <ArrowLeftIcon /> }
+              >
+                Back
+              </Button>
               <Container component="main" maxWidth="sm">
                 <CssBaseline />
                 <Box
