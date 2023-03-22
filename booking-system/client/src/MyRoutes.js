@@ -8,8 +8,10 @@ import Homepage from './Homepage';
 import Ssh from './Ssh';
 import Calendar from './Calendar';
 import NotFound from './NotFound';
+import TicketForm from './TicketForm';
 
 import FPGA from './FPGA';
+
 import FpgaVid from './interface/FpgaVid'
 import Stm32 from './interface/STM32';
 import './interface/Interface.css';
@@ -60,6 +62,9 @@ const MyRoutes = () => {
           <RequireAuth>
             <Stm32 />
           </RequireAuth>
+        } />
+        <Route path="ticketform" element={
+            <TicketForm />
         } />
         <Route path="*" element={<NotFound />} />
       </Routes>

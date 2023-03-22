@@ -53,6 +53,9 @@ router.post('/user', auth.handleRegister);
 router.post('/login', auth.handleLogin);
 router.put('/ssh/:id', auth.updateSSH);
 
+const ticket = require('./fileticket');
+router.post('/ticket', ticket.handleTicket);
+
 const stm32Router = require('./stm32Router')
 const jwt = require('jsonwebtoken');
 

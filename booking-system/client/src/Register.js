@@ -92,7 +92,6 @@ const Register = () => {
   const handleClose = () => {
     setOpen(false);
   }
-
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -187,11 +186,15 @@ const Register = () => {
                 </Alert>
               </Snackbar>
 
-
-              <Grid container justifyContent="flex-end">
-                <Grid item>
+              <Grid container>
+                <Grid item xs>
                   <Link href="/" variant="body2">
                     Already have an account? Sign in
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="/ticketform" variant="body2">
+                    Need help? Contact us
                   </Link>
                 </Grid>
               </Grid>

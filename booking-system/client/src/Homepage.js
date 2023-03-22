@@ -81,76 +81,82 @@ const Homepage = (props) => {
           <Box
           sx={{
             marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           >
           <h1>Homepage</h1>
 
             <Paper elevation={3} style={paperStyle} >
 
-            <Grid container columnSpacing={1} direction="row" alignItems="center"> 
-              <Grid item>
-                <PersonIcon />
+              <Grid container columnSpacing={1} direction="row" alignItems="center"> 
+                <Grid item>
+                  <PersonIcon />
+                </Grid>
+                <Grid item marginBottom="6px">
+                  <h3>{user.name} ({user.role})</h3>
+                </Grid>
               </Grid>
-              <Grid item marginBottom="6px">
-                <h3>{user.name} ({user.role})</h3>
-              </Grid>
-            </Grid>
 
-            <Grid container rowSpacing={3} direction="column" alignItems="center"> 
-              <Grid item>
-                <p>Book a timeslot using the calendar:</p>
-                <Link to="/calendar">
-                  <Button
-                    color='primary'
-                    variant='contained'
-                    fullWidth
+              <Grid container rowSpacing={3} direction="column" alignItems="center"> 
+                <Grid item>
+                  <p>Book a timeslot using the calendar:</p>
+                  <Link to="/calendar">
+                    <Button
+                      color='primary'
+                      variant='contained'
+                      fullWidth
+                    >
+                      Calendar
+                    </Button>
+                  </Link>
+                </Grid>
+
+                <Grid item>
+                  <p>Add your SSH public key here. This is used for authentication purposes for the app. Please do so before accessing the other sites below</p>
+                  <Link to="/ssh">
+                    <Button
+                      color='primary'
+                      variant='contained'
+                      fullWidth
+                    >
+                      Add SSH key
+                    </Button>
+                  </Link>
+                </Grid>
+
+                <Grid item>
+                  <p>The instructions for using the remote FPGA is detailed here.</p>
+                  <Link to="/fpga">
+                    <Button
+                      color='primary'
+                      variant='contained'
+                      fullWidth
+                    >
+                      Read remote FPGA instructions
+                    </Button>
+                  </Link>
+                </Grid>
+
+                <Grid item>
+                  <p>Access the relevant FPGA/MCU based on the module you are enrolled in:</p>
+                  <ButtonGroup 
+                    orientation="vertical"
+                    variant="contained"
+                    style= {buttonGroupStyle}
                   >
-                    Calendar
-                  </Button>
-                </Link>
-              </Grid>
+                    {gen_module_links(JSON.parse(user.modules))}
+                  </ButtonGroup>
+                </Grid>
 
-              <Grid item>
-                <p>Add your SSH public key here. This is used for authentication purposes for the app. Please do so before accessing the other sites below</p>
-                <Link to="/ssh">
-                  <Button
-                    color='primary'
-                    variant='contained'
-                    fullWidth
-                  >
-                    Add SSH key
-                  </Button>
-                </Link>
+                <Grid item>
+                    <Link href="/ticketform" variant="body2">
+                        Need help? Contact us
+                    </Link>
+                </Grid>
               </Grid>
-
-              <Grid item>
-                <p>The instructions for using the remote FPGA is detailed here.</p>
-                <Link to="/fpga">
-                  <Button
-                    color='primary'
-                    variant='contained'
-                    fullWidth
-                  >
-                    Read remote FPGA instructions
-                  </Button>
-                </Link>
-              </Grid>
-
-              <Grid item>
-                <p>Access the relevant FPGA/MCU based on the module you are enrolled in:</p>
-                <ButtonGroup 
-                  orientation="vertical"
-                  variant="contained"
-                  style= {buttonGroupStyle}
-                >
-                  {gen_module_links(JSON.parse(user.modules))}
-                </ButtonGroup>
-              </Grid>
-            </Grid>
 
               <Button
                 type='submit'

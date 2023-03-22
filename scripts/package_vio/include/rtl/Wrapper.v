@@ -6,6 +6,7 @@
 module Wrapper(
   input clk,
   input RX,
+
   output TX,
   output [15:0] led,
   output dp,
@@ -44,6 +45,7 @@ top_inst (
   .SW(SW),
   .RX(RX),
 
+  .TX(TX),
   .cathode(cathode),
   .anode(anode),
   .dp(dp),
