@@ -4,6 +4,7 @@ import {
     Container,
     CssBaseline,
     Typography,
+    Link,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -27,6 +28,10 @@ const TicketSuccess = () => {
                     Ticket Filed Successfully!
                   </Typography>
                   
+                  <Link href="/" variant="body2">
+                      {"Return to Login"}
+                  </Link>
+
                 </Box>
               </Container>
             </ThemeProvider>

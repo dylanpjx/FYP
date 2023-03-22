@@ -15,6 +15,10 @@ Ticket.init({
     description: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    ticketType: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     sequelize,

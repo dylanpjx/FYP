@@ -7,6 +7,10 @@ import {
     CssBaseline,
     TextField,
     Typography,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
@@ -21,13 +25,14 @@ const TicketForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [description, setDescription] = useState('');
+    const [ticketType, setTicketType] = useState('');
 
     const onSubmit = async (e) => {
         e.preventDefault();
         
         try {
             const res = await axios.post(`${BACKEND_URL}/ticket`, {
-                name, email, description
+                name, email, description, ticketType
             });
             console.log(res.data);
             return navigate('/ticketsuccess');
@@ -75,6 +80,19 @@ const TicketForm = () => {
                       autoComplete="email"
                       onChange={(e) => setEmail(e.target.value)}
                     />
+                    <FormControl fullWidth margin="normal" required>
+                      <InputLabel id="ticket-type-label">Ticket Type</InputLabel>
+                      <Select
+                        labelId="ticket-type-label"
+                        id="ticket-type"
+                        value={ticketType}
+                        label="Ticket Type"
+                        onChange={(e) => setTicketType(e.target.value)}
+                      >
+                        <MenuItem value={'Bug'}>Bug</MenuItem>
+                        <MenuItem value={'Question'}>Question</MenuItem>
+                      </Select>
+                    </FormControl>
                     <TextField
                       margin="normal"
                       required
