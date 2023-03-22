@@ -68,9 +68,6 @@ const MyRoutes = () => {
                 <Route path="ticketform" element={
                     <TicketForm />
                 } />
-                <Route path="ticketsuccess" element={
-                    <TicketSuccess />
-                } />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
