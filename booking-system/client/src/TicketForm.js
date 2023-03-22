@@ -11,6 +11,11 @@ import {
     InputLabel,
     MenuItem,
     Select,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
@@ -26,6 +31,9 @@ const TicketForm = () => {
     const [email, setEmail] = useState('');
     const [description, setDescription] = useState('');
     const [ticketType, setTicketType] = useState('');
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [dialogMessage, setDialogMessage] = useState("");
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -35,12 +43,25 @@ const TicketForm = () => {
                 name, email, description, ticketType
             });
             console.log(res.data);
-            return navigate('/ticketsuccess');
+            setDialogOpen(true);
+            setDialogMessage("Ticket Filed Successfully.");
+            
             
         } catch (err) {
             console.error(err.response.data);
+            setDialogOpen(true);
+            setDialogMessage(err.response.data);
         }
+
     }
+
+    const handleDialogClose = () => {
+      setDialogMessage("");
+      setDialogOpen(false);
+      return navigate("/");
+    }
+
+
     return (
         <div>
             <ThemeProvider theme={theme}>
@@ -117,6 +138,22 @@ const TicketForm = () => {
                 </Box>
               </Container>
             </ThemeProvider>
+            <Dialog
+              open={dialogOpen}
+              onClose={handleDialogClose}
+            >
+              <DialogTitle>Success</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  {dialogMessage}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleDialogClose}>
+                  Close
+                </Button>
+              </DialogActions>
+            </Dialog>      
         </div>
     )
 };
