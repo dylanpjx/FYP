@@ -33,7 +33,7 @@ const Homepage = (props) => {
       switch (module) {
         case "EE2026":
           return (
-            <Link to="/fpgavid" key="nexys">
+            <Link to="/fpga" key="nexys">
               <Button
                 color='primary'
                 variant='contained'
@@ -57,7 +57,7 @@ const Homepage = (props) => {
           )
         case "EE4218":
           return (
-            <Link to="/fpgavid" key="zedboard">
+            <Link to="/fpga" key="zedboard">
               <Button
                 color='primary'
                 variant='contained'
@@ -128,14 +128,14 @@ const Homepage = (props) => {
                 </Grid>
 
                 <Grid item>
-                  <p>The instructions for using the remote FPGA is detailed here.</p>
-                  <Link to="/fpga">
+                  <p>The instructions for preparing your FPGA project before your booking is detailed here.</p>
+                  <Link to="/vio">
                     <Button
                       color='primary'
                       variant='contained'
                       fullWidth
                     >
-                      Read remote FPGA instructions
+                      Add VIO Core instructions
                     </Button>
                   </Link>
                 </Grid>

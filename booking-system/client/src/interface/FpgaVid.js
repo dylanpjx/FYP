@@ -37,7 +37,7 @@ const FpgaVid = () => {
             minWidth: "800px"
           }}
         >
-          <h2>During your booking:</h2>
+          <h2>Guide to Remote FPGA</h2>
           <br/>
           <ol>
             <li>Open a terminal and run <code>SSH -L -N 1234:localhost:3121 fpgaws2.panicker.in</code> for Vivado</li>
@@ -107,22 +107,10 @@ const FpgaVid = () => {
                   </ul>
                 </AccordionDetails>
               </Accordion>
+              <br/>
+              <li>Remember to save your work <b>BEFORE</b> your booking ends</li>
             </ol>
           </Grid>
-
-        <Grid item xs={8}
-          sx={{
-            minWidth: "800px"
-          }}
-        >
-          <h2>After your booking:</h2><br/>
-          Disconnect from remote FPGA by closing the hardware server on Vivado.<br/><br/>
-          Disconnect from the remote UART by clicking the <b>Open</b> button such that it is "unpressed".
-          <br/>
-          <br/>
-          <img src={require('../images/fpga/realterm_close.png')} height={400}/>
-          
-        </Grid>
       </Grid>
     </div>
   )

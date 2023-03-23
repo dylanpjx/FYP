@@ -51,12 +51,12 @@ const MyRoutes = () => {
             <Calendar />
           </RequireAuth>
         } />
-        <Route path="/fpga" element={
+        <Route path="/vio" element={
           <RequireAuth>
             <FPGA />
           </RequireAuth>
         } />
-        <Route path="/fpgavid" element={
+        <Route path="/fpga" element={
           <RequireAuth>
             <FpgaVid />
           </RequireAuth>
