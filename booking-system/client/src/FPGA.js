@@ -114,7 +114,7 @@ const FPGA = () => {
               <b>Please do not download and run the script blindly, read below and understand what the script does.</b>
               <ol>
                 <li>Add Vivado to path and run <code>settings64.sh</code>/<code>settings64.bat</code> in <code>Vivado/[VERSION]</code> directory</li>
-                <li>Download the folder <a>here</a></li>
+                <li>Download the folder <a href="/package_vio.zip">here</a></li>
                 <li>Extract the contents of the zip folder into your project root like this:</li><br/>
                 <img src={require('./images/fpga/zip_contents.png')} height={400}/>
                 <br/>
