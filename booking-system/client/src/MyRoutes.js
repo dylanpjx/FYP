@@ -12,7 +12,6 @@ import TicketForm from './TicketForm';
 
 import FPGA from './FPGA';
 
-import FpgaVid from './interface/FpgaVid'
 import Stm32 from './interface/STM32';
 import './interface/Interface.css';
 
@@ -51,14 +50,9 @@ const MyRoutes = () => {
             <Calendar />
           </RequireAuth>
         } />
-        <Route path="/vio" element={
-          <RequireAuth>
-            <FPGA />
-          </RequireAuth>
-        } />
         <Route path="/fpga" element={
           <RequireAuth>
-            <FpgaVid />
+            <FPGA />
           </RequireAuth>
         } />
         <Route path="/stm32" element={

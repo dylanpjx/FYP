@@ -115,7 +115,7 @@ const Homepage = (props) => {
                 </Grid>
 
                 <Grid item>
-                  <p>Add your SSH public key here. This is used for authentication purposes for the app. Please do so before accessing the other sites below</p>
+                  <p>Add your SSH public key here. This is used for authentication purposes. Please do so before accessing the other sites below.</p>
                   <Link to="/ssh">
                     <Button
                       color='primary'
@@ -123,19 +123,6 @@ const Homepage = (props) => {
                       fullWidth
                     >
                       Add SSH key
-                    </Button>
-                  </Link>
-                </Grid>
-
-                <Grid item>
-                  <p>The instructions for preparing your FPGA project before your booking is detailed here.</p>
-                  <Link to="/vio">
-                    <Button
-                      color='primary'
-                      variant='contained'
-                      fullWidth
-                    >
-                      Add VIO Core instructions
                     </Button>
                   </Link>
                 </Grid>
