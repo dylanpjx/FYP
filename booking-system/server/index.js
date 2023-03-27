@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -13,7 +15,7 @@ const { Sequelize } = require("sequelize");
 
 app.use('/', router);
 
-const sequelize = new Sequelize('fyp', 'root', 'root', {
+const sequelize = new Sequelize('fyp', 'root', process.env.SQL_PASS, {
     host: 'localhost',
     dialect: 'mysql'
 });

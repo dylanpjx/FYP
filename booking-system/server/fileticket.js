@@ -19,7 +19,7 @@ const handleTicket = async (req, res) => {
             secure: true,
             auth: {
                 user: 'premises97@gmail.com',
-                pass: 'pdccwynezcorsumx'
+                pass: process.env.MAIL_PASS
             }
         });
 
