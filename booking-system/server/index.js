@@ -1,27 +1,16 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+app.use(cors());
 
 const router = express.Router()
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-const cors = require('cors');
 const mysql = require('mysql2');
 const { Sequelize } = require("sequelize");
 
-const allowedOrigins = ['http://localhost:3000']
-
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            var msg = 'The CORS policy for this site does not allow access from the specified origin'
-            return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-    }
-}));
 app.use('/', router);
 
 const sequelize = new Sequelize('fyp', 'root', 'root', {

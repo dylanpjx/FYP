@@ -33,7 +33,7 @@ const Homepage = (props) => {
       switch (module) {
         case "EE2026":
           return (
-            <Link to="/fpgavid" key="nexys">
+            <Link to="/fpga" key="nexys">
               <Button
                 color='primary'
                 variant='contained'
@@ -57,7 +57,7 @@ const Homepage = (props) => {
           )
         case "EE4218":
           return (
-            <Link to="/fpgavid" key="zedboard">
+            <Link to="/fpga" key="zedboard">
               <Button
                 color='primary'
                 variant='contained'
@@ -115,7 +115,7 @@ const Homepage = (props) => {
                 </Grid>
 
                 <Grid item>
-                  <p>Add your SSH public key here. This is used for authentication purposes for the app. Please do so before accessing the other sites below</p>
+                  <p>Add your SSH public key here. This is used for authentication purposes. Please do so before accessing the other sites below.</p>
                   <Link to="/ssh">
                     <Button
                       color='primary'
@@ -123,19 +123,6 @@ const Homepage = (props) => {
                       fullWidth
                     >
                       Add SSH key
-                    </Button>
-                  </Link>
-                </Grid>
-
-                <Grid item>
-                  <p>The instructions for using the remote FPGA is detailed here.</p>
-                  <Link to="/fpga">
-                    <Button
-                      color='primary'
-                      variant='contained'
-                      fullWidth
-                    >
-                      Read remote FPGA instructions
                     </Button>
                   </Link>
                 </Grid>
