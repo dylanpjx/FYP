@@ -1,11 +1,11 @@
 const userData = [
     { 
-        name: 'Dylan', 
+        name: 'Admin',
         group: 1, 
-        role: 'Student', 
+        role: 'Admin', 
         modules: JSON.stringify(['EE4218', 'EE2026', 'EE2028']), 
-        email: 'dylan_pang@u.nus.edu', 
-        password: '123'
+        email: 'admin', 
+        password: 'root'
     },
 ];
 
