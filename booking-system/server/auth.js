@@ -54,7 +54,11 @@ const handleRegister = async (req, res) => {
                 modules.push(path.parse(userCsvFile).name);
             }
         }
-
+        
+        // If the user is an Admin, add the user to all available modules
+        if (userData.role === 'admin') {
+          modules = ["EE2026", "EE2028", "EE4218"];
+        }
         userData = { ...userData, modules: JSON.stringify(modules) };
 
         if (!userData) {

@@ -96,7 +96,7 @@ const Homepage = (props) => {
                   <PersonIcon />
                 </Grid>
                 <Grid item marginBottom="6px">
-                  <h3>{user.name} ({user.role})</h3>
+                  <h3>{user.name} ({user.role.charAt(0).toUpperCase() + user.role.slice(1)})</h3> {/*Capitalise the user role*/}
                 </Grid>
               </Grid>
 

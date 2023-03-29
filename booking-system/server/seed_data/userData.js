@@ -2,9 +2,9 @@ const userData = [
     { 
         name: 'Admin',
         group: 1, 
-        role: 'Admin', 
+        role: 'admin',
         modules: JSON.stringify(['EE4218', 'EE2026', 'EE2028']), 
-        email: 'admin', 
+        email: 'admin',
         password: 'root'
     },
 ];
