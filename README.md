@@ -29,5 +29,3 @@ docker inspect [CONTAINER ID]
 `scripts/package\_vio` contains the TCL script that student needs to add VIO core to their project.
 
 `scripts/tcl_scripts` contains miscellaneous scripts used during testing for creating a virtual API.
-
-[How to create a blank bitstream for resetting FPGA?](https://www.xjtag.com/support/application-notes/clearing-xilinx-fpga-configuration-to-allow-boundary-scan-testing/)
