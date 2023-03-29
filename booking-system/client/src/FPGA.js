@@ -47,7 +47,7 @@ const FPGA = () => {
         >
           <Grid item sx={{marginBottom: 2}}>
             <Tabs value={tab} onChange={handleChange}>
-              <Tab label="Add VIO Guide" />
+              <Tab label="VIO Core Guide" />
               <Tab label="Remote FPGA Guide" />
               <Tab label="Video Stream" />
             </Tabs>
@@ -55,7 +55,7 @@ const FPGA = () => {
 
 
           <div hidden={tab !== 0}>
-            <h2>Before your booking:</h2><br/>
+            <h2>Guide to adding VIO core</h2><br/>
             You can prep your design for remote debugging by adding a Virtual IO IP core to it. This allows you to use a virtual panel in Vivado to simulate hardware inputs like push buttons and switches. <b>IF YOU ARE ONLY USING UART, YOU CAN SKIP THE INSTRUCTIONS BELOW.</b><br/><br/>
 
             <Accordion>
@@ -82,7 +82,7 @@ const FPGA = () => {
                       <br/>
                       <br/>
 
-                      <li>Configure the VIO core accordingly.</li>
+                      <li>Configure the VIO core accordingly. This might be a little confusing, your design outputs are inputs to the core and vice versa. Read the example below to understand how it works.</li>
                       <br/>
                       <b>Input Probe Count</b> = Number of outputs to your design that you want to virtualize<br/>
                       <b>Output Probe Count</b> = Number of inputs to your design that you want to virtualize<br/>
@@ -225,6 +225,9 @@ const FPGA = () => {
               </ol>
             </div>
 
+          <div hidden={tab !== 2}>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/3vDz4_xp6oM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
         </Grid>
       </Grid>
     </div>
