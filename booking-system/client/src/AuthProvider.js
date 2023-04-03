@@ -4,7 +4,6 @@ import axios from "axios";
 
 import DialogPopup from './DialogPopup';
 
-const BACKEND_URL = 'http://localhost:5000';
 
 export const AuthContext = createContext();
 
@@ -60,7 +59,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post(`${BACKEND_URL}/login`, {
+      const res = await axios.post(`${REACT_APP_BACKEND_URL}/login`, {
         email,
         password,
       });

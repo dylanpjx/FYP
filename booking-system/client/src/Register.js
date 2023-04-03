@@ -21,7 +21,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const BACKEND_URL = 'http://localhost:5000';
 
 const Register = () => {
   const theme = createTheme();
@@ -73,7 +72,7 @@ const Register = () => {
 
     if (validateEmail() && validatePassword()) {
       try {
-        const res = await axios.post(`${BACKEND_URL}/user`, {
+        const res = await axios.post(`${REACT_APP_BACKEND_URL}/user`, {
           email, password
         });
         console.log(res.data);

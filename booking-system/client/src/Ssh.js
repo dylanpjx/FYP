@@ -17,7 +17,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from './AuthProvider';
 import './Ssh.css';
 
-const BACKEND_URL = 'http://localhost:5000';
 
 const Ssh = () => {
   let navigate = useNavigate();
@@ -45,7 +44,7 @@ const Ssh = () => {
     console.log(user.id);
 
     try {
-      const res = await axios.put(`${BACKEND_URL}/ssh/${user.id}`, {
+      const res = await axios.put(`${REACT_APP_BACKEND_URL}/ssh/${user.id}`, {
         sshkey: form
       });
 

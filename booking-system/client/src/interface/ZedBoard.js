@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
 
-const BACKEND_URL = 'http://localhost:5000'
 const MODULE = 'EE4218';
 
 const Zedboard = () => {
@@ -53,7 +52,7 @@ const Zedboard = () => {
 
     const checkUserAccess = async () => {
       try {
-        const res = await axios.get(`${BACKEND_URL}/calendar/${MODULE}/${user.group}`);
+        const res = await axios.get(`${REACT_APP_BACKEND_URL}/calendar/${MODULE}/${user.group}`);
         events = res.data;
         
         const currentDate = new Date();

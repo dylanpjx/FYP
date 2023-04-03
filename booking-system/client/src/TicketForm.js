@@ -21,7 +21,6 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 
-const BACKEND_URL = 'http://localhost:5000';
 
 const TicketForm = () => {
     let navigate = useNavigate();
@@ -40,7 +39,7 @@ const TicketForm = () => {
         e.preventDefault();
         
         try {
-            const res = await axios.post(`${BACKEND_URL}/ticket`, {
+            const res = await axios.post(`${REACT_APP_BACKEND_URL}/ticket`, {
                 name, email, description, ticketType
             });
             console.log(res.data);

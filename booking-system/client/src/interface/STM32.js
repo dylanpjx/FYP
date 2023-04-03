@@ -33,7 +33,6 @@ import {
 import LoadingScreen from './LoadingScreen';
 import NotAllowed from './NotAllowed';
 
-const BACKEND_URL = 'http://localhost:5000';
 const MODULE = 'EE2028';
 
 const sendSTM32 = async (buttonName, buttonState) => {
@@ -101,7 +100,7 @@ const STM32 = () => {
 
   const { user } = useContext(AuthContext);
 
-  const [isAllowed, setIsAllowed] = useState(false);
+  const [isAllowed, setIsAllowed] = useState(true);
   const [remainingTime, setRemainingTime] = useState(0);
   const [pitch, setPitch] = useState(0);
   const [roll, setRoll] = useState(0);
@@ -122,7 +121,7 @@ const STM32 = () => {
     setPitch(newValue);
     const acc = getAcclerometerValues(yaw,newValue,roll);
     try{
-      const res = await axios.post(`${BACKEND_URL}/stm32`, 
+      const res = await axios.post(`${REACT_APP_BACKEND_URL}/stm32`, 
       { button: "SENSOR", value: acc });
       console.log(res.data);
     } catch (err) {
@@ -133,7 +132,7 @@ const STM32 = () => {
     setRoll(newValue);
     const acc = getAcclerometerValues(yaw,pitch,newValue);
     try{
-      const res = await axios.post(`${BACKEND_URL}/stm32`, 
+      const res = await axios.post(`${REACT_APP_BACKEND_URL}/stm32`, 
       { button: "SENSOR", value: acc });
       console.log(res.data);
     } catch (err) {
@@ -144,7 +143,7 @@ const STM32 = () => {
     setYaw(newValue);
     const acc = getAcclerometerValues(newValue,pitch,roll);
     try{
-      const res = await axios.post(`${BACKEND_URL}/stm32`, 
+      const res = await axios.post(`${REACT_APP_BACKEND_URL}/stm32`, 
       { button: "SENSOR", value: acc });
       console.log(res.data);
     } catch (err) {
@@ -176,7 +175,7 @@ const STM32 = () => {
   const checkUserAccess = async () => {
     try{
       if (remainingTime === 0) {
-        const res = await axios.get(`${BACKEND_URL}/calendar/${MODULE}/${user.group}`);
+        const res = await axios.get(`${REACT_APP_BACKEND_URL}/calendar/${MODULE}/${user.group}`);
         setEvents(res.data);
         const currentDate = new Date();
         let iterable;

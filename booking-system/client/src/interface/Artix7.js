@@ -17,7 +17,6 @@ import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
 
-const BACKEND_URL = 'http://localhost:5000';
 const MODULE = 'EE2026'
 
 const Artix7 = () => {
@@ -53,7 +52,7 @@ const Artix7 = () => {
 
       const checkUserAccess = async () => {
         try {
-          const res = await axios.get(`${BACKEND_URL}/calendar/${MODULE}/${user.group}`);
+          const res = await axios.get(`${REACT_APP_BACKEND_URL}/calendar/${MODULE}/${user.group}`);
           events = res.data;
           
           const currentDate = new Date();
