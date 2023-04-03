@@ -38,7 +38,7 @@ const MODULE = 'EE2028';
 const sendSTM32 = async (buttonName, buttonState) => {
   try {
     const response = await axios.post(
-      BACKEND_URL+'/stm32', 
+      `${process.env.REACT_APP_BACKEND_URL}/stm32`,
       { button: buttonName, value: buttonState }
     );
     console.log(buttonName, buttonState, response.data)
@@ -121,7 +121,7 @@ const STM32 = () => {
     setPitch(newValue);
     const acc = getAcclerometerValues(yaw,newValue,roll);
     try{
-      const res = await axios.post(`${REACT_APP_BACKEND_URL}/stm32`, 
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/stm32`, 
       { button: "SENSOR", value: acc });
       console.log(res.data);
     } catch (err) {
@@ -132,7 +132,7 @@ const STM32 = () => {
     setRoll(newValue);
     const acc = getAcclerometerValues(yaw,pitch,newValue);
     try{
-      const res = await axios.post(`${REACT_APP_BACKEND_URL}/stm32`, 
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/stm32`, 
       { button: "SENSOR", value: acc });
       console.log(res.data);
     } catch (err) {
@@ -143,7 +143,7 @@ const STM32 = () => {
     setYaw(newValue);
     const acc = getAcclerometerValues(newValue,pitch,roll);
     try{
-      const res = await axios.post(`${REACT_APP_BACKEND_URL}/stm32`, 
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/stm32`, 
       { button: "SENSOR", value: acc });
       console.log(res.data);
     } catch (err) {
@@ -175,7 +175,7 @@ const STM32 = () => {
   const checkUserAccess = async () => {
     try{
       if (remainingTime === 0) {
-        const res = await axios.get(`${REACT_APP_BACKEND_URL}/calendar/${MODULE}/${user.group}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/calendar/${MODULE}/${user.group}`);
         setEvents(res.data);
         const currentDate = new Date();
         let iterable;

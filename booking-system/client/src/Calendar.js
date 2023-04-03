@@ -49,7 +49,7 @@ const Calendar = () => {
   useEffect(() => {
     const fetchRemote = async () => {
       try {
-        const res = await axios.get(`${REACT_APP_BACKEND_URL}/calendar/${viewMode}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/calendar/${viewMode}`);
         const events = res.data;
 
         const parsedEvents = events.map(event => {
@@ -81,7 +81,7 @@ const Calendar = () => {
       const module = stateRef.current;
 
       if (action === "edit") {
-        url = `${REACT_APP_BACKEND_URL}/calendar/${event.event_id}`;
+        url = `${process.env.REACT_APP_BACKEND_URL}/calendar/${event.event_id}`;
         method = "PUT";
 
         event = {
@@ -91,7 +91,7 @@ const Calendar = () => {
           module: module
         };
       } else if (action === "create") {
-        url = `${REACT_APP_BACKEND_URL}/calendar`;
+        url = `${process.env.REACT_APP_BACKEND_URL}/calendar`;
         method = "POST";
         event_color = GROUP_COLORS[userGroup - 1];
 
@@ -132,7 +132,7 @@ const Calendar = () => {
     try {
       const userGroup = user.group;
       const userRole = user.role;
-      const res = await axios.delete(`${REACT_APP_BACKEND_URL}/calendar/${deletedId}`, 
+      const res = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/calendar/${deletedId}`, 
         {
           data: {
             group_id: userGroup,
@@ -152,7 +152,7 @@ const Calendar = () => {
     try {
       const userGroup = user.group;
       const userRole = user.role;
-      const res = await axios.put(`${REACT_APP_BACKEND_URL}/calendar/${updatedEvent.event_id}`,
+      const res = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/calendar/${updatedEvent.event_id}`,
         {
           ...updatedEvent,
           group_id: userGroup,

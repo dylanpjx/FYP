@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post(`${REACT_APP_BACKEND_URL}/login`, {
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         email,
         password,
       });

@@ -39,7 +39,7 @@ const TicketForm = () => {
         e.preventDefault();
         
         try {
-            const res = await axios.post(`${REACT_APP_BACKEND_URL}/ticket`, {
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/ticket`, {
                 name, email, description, ticketType
             });
             console.log(res.data);

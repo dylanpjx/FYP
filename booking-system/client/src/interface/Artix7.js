@@ -52,7 +52,7 @@ const Artix7 = () => {
 
       const checkUserAccess = async () => {
         try {
-          const res = await axios.get(`${REACT_APP_BACKEND_URL}/calendar/${MODULE}/${user.group}`);
+          const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/calendar/${MODULE}/${user.group}`);
           events = res.data;
           
           const currentDate = new Date();

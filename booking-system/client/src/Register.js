@@ -72,7 +72,7 @@ const Register = () => {
 
     if (validateEmail() && validatePassword()) {
       try {
-        const res = await axios.post(`${REACT_APP_BACKEND_URL}/user`, {
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user`, {
           email, password
         });
         console.log(res.data);
