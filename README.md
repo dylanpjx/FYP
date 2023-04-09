@@ -1,17 +1,38 @@
 # FYP
 
-## Web
+## Web (for testing)
 
-To run the client (for testing):
+To run the client:
+
 ```sh
 cd booking-system/client
 npm start
 ```
 
-To run the server (for testing):
+To run the server:
+
 ```sh
 cd booking-system/server
 npm run dev
+```
+
+## Web (for deployment)
+
+To run the client:
+
+```sh
+cd booking-system/client
+npm run build
+serve -s build -l 2000
+```
+
+To run the server:
+
+Remember to change all occurrences of `force` to `alter` in `server/seedDb.js`
+
+```sh
+cd booking-system/server
+npm start
 ```
 
 Docker
