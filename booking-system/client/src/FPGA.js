@@ -153,8 +153,8 @@ const FPGA = () => {
             <h2>Guide to Remote FPGA</h2>
             <br/>
             <ol>
-              <li>Open a terminal and run <code>SSH -L -N 1234:localhost:3121 student@fpgaws2.panicker.in</code> for Vivado</li>
-              <li>Open a terminal and run <code>SSH -L -N 1235:localhost:3131 student@fpgaws2.panicker.in</code> for Console</li>
+              <li>Open a terminal and run <code>SSH -N -L 1234:localhost:3121 student@fpgaws2.panicker.in</code> for Vivado</li>
+              <li>Open a terminal and run <code>SSH -N -L 1235:localhost:3131 student@fpgaws2.panicker.in</code> for Console</li>
 
               <li>On Vivado, <b>Generate bitstream > Open Hardware Manager > Open Target > Open new Target... > Next</b></li>
               <li>Configure the target as shown in the image below:</li>
